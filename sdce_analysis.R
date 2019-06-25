@@ -1,6 +1,6 @@
 library(rPython)
 python.load("data_combination.py")
-counts <- read.delim(combined_data,"\t")
+counts <- read.delim("combined_data","\t", header=TRUE, row.names = 1)
 library("scde")
 models <- scde.error.models(counts)
 prior <- scde.expression.prior(models, counts)

@@ -3,7 +3,7 @@ import os
 
 lines = []
 i = 0
-for root, dirs, files in os.walk(".."):
+for root, dirs, files in os.walk("."):
     for file in files:
         if file.endswith(".csv"):
 
