@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 import os
 
 lines = []
@@ -18,6 +19,5 @@ for root, dirs, files in os.walk(".."):
                         lines[j] += "\t" + split_line[1]
             i += 1
 
-print(lines)
-with open("combined_data","w") as output:
+with open("combined_data", "w") as output:
     output.writelines(lines)
