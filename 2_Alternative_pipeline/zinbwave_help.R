@@ -13,4 +13,7 @@ sume <- SummarizedExperiment(
   ), 
   colData = colnames(test_data_gene_count_matrix)
 )
+
 sume
+sce_zinb <- zinbwave(sume, k=2, epsilon=2285)
+sce_zinb
