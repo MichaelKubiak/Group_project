@@ -1,11 +1,11 @@
 library(rPython)
 python.load("data_combination.py")
-counts <- as.matrix(as.data.frame(read.delim("combined_data","\t", header=TRUE, row.names = 1)))
+counts <- as.data.frame(read.delim("combined_data","\t", header=FALSE, row.names = 1))
 library("scde")
 models <- scde.error.models(counts)
 prior <- scde.expression.prior(models, counts)
 file.names <- list.files(path=".", pattern="*.csv", full.names=TRUE, recursive=FALSE)
-
+# Adjusted distance calculation by direct dropout
 p.self.fail <- scde.failure.probability(models,counts)
 n.simulations <- 10 
 k<-0.9
@@ -23,3 +23,9 @@ dl<-lapply(1:n.simulations,function(i){
 })
 direct.dist <- as.dist(1-Reduce("+",dl)/length(dl))
 
+library(tsne)
+dim.red.dist <- tsne(direct.dist)
+
+library(mclust)
+BIC <- mclustBIC(dim.red.dist)
+plot(BIC)
