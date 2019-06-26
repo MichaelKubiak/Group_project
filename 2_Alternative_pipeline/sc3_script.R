@@ -3,22 +3,23 @@ library(scater)
 library(SingleCellExperiment)
 
 
-test_data_gene_count_matrix <- read.delim("/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/Full_data_gene_count_matrix.csv", row.names = 1)
+test_data_gene_count_matrix <- read.delim("./Group_project/2_Alternative_pipeline/Full_data_gene_count_matrix.csv", row.names = 1)
 
-info_file <- read.delim("/home/tsc21/Documents/BS7120/Group_project/SraRunTable(1).txt")
+info_file <- read.delim("./Group_project/SraRunTable(1).txt")
 
 
 
 head(info_file)
 
-yan
-sce <- SingleCellExperiment(
+sce <- SummarizedExperiment(
   assays = list(
     counts = as.matrix(test_data_gene_count_matrix),
     logcounts = log2(as.matrix(test_data_gene_count_matrix) + 1)
   ), 
   colData = info_file
 )
+
+sce <- zinbwave(sce, k=2, epsilon=2285)
 
 
 # define feature names in feature_symbol column
@@ -32,5 +33,5 @@ plotPCA(sce, colour_by = "cell_type")
 
 sce <- sc3(sce, ks = 10, biology = TRUE)
 
-sc3_interactive(sce)
+# sc3_interactive(sce)
 
