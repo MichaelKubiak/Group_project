@@ -1,24 +1,23 @@
-
-
-sce <- SingleCellExperiment(
-  assays = list(
-    counts = test_data_gene_count_matrix,
-    logcounts = log2(test_data_gene_count_matrix)
-  ), 
-  colData = colnames(test_data_gene_count_matrix)
-)
-
-
-test_data_gene_count_matrix <- read.delim("/home/izzy_r/Group_project/Project_repo/Group_project/2_Alternative_pipeline/test_data_gene_count_matrix.csv", row.names=1)
-
+library(SingleCellExperiment)
 library(scater)
 
-example_sce <- sce
-example_sce <- calculateQCMetrics(example_sce)
-colnames(colData(example_sce))
+# Create a SingleCellExperiment object
+sce <- SingleCellExperiment(
+  assays <- list(
+    counts <- test_data_gene_count_matrix,
+    logcounts <- log2(test_data_gene_count_matrix)
+  ), 
+  colData <- colnames(test_data_gene_count_matrix)
+)
 
-plotPCA(sce, colour_by = "cell_type1")
+# Gene_matrix for current analysis here
+# Note: setwd("/home/izzy_r/Group_project/Project_repo/Group_project")
+test_data_gene_count_matrix <- read.delim("./2_Alternative_pipeline/test_data_gene_count_matrix.csv", row.names=1)
+
+# scater quality control matrix
+sce <- calculateQCMetrics(sce, use_spikes = FALSE)
+colData(sce)
 
 
-
-sce <- sc3(sce, ks = )
+#plotPCA(sce)
+#sce <- sc3(sce, ks = )
