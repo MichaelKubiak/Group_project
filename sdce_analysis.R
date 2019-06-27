@@ -7,7 +7,7 @@ prior <- scde.expression.prior(models, counts)
 file.names <- list.files(path=".", pattern="*.csv", full.names=TRUE, recursive=FALSE)
 # Adjusted distance calculation by direct dropout
 p.self.fail <- scde.failure.probability(models,counts)
-n.simulations <- 10 
+n.simulations <- 500 
 k<-0.9
 cell.names <- colnames(counts)
 names(cell.names) <- cell.names
