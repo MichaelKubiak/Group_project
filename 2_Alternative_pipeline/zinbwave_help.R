@@ -17,3 +17,5 @@ sume <- SummarizedExperiment(
 sume
 sce_zinb <- zinbwave(sume, k=2, epsilon=2285)
 sce_zinb
+
+
