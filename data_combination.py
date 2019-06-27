@@ -31,6 +31,7 @@ for file in files:
                 lines.append("\t" + file)
                 # add everything in the file to the lines list (including the row names)
                 lines += nextcsv.readlines()
+                print(lines)
 
             else:
                 lines[0] += "\t" + file
@@ -39,7 +40,7 @@ for file in files:
                 # add the second column of the file to the correct lines in the lines list
                 lines = add_to_lines(lines, nextlines)
         i += 1
-
+lines[0] += "\n"
 # open the output file to write the output
 with open("combined_data", "w") as output:
     output.writelines(lines)

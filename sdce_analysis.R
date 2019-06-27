@@ -1,6 +1,6 @@
 #library(rPython)
 #python.load("data_combination.py")
-counts <- as.data.frame(read.delim("combined_data","\t", header=FALSE, row.names = 1))
+counts <- as.data.frame(read.delim("combined_data","\t", header=TRUE, row.names = 1))
 library("scde")
 models <- scde.error.models(counts, n.cores=4,threshold.segmentation = TRUE, save.crossfit.plots = FALSE, save.model.plots = FALSE, verbose = 1)
 prior <- scde.expression.prior(models, counts)
