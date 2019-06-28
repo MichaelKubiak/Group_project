@@ -1,6 +1,27 @@
-div{
-    width: getWidth(this);
-    border: 15px solid green;
-    padding: 50px;
-    margin: 20px;
+.screenwidth{
+    width:getWidth(this)
+}
+.screenwidth .title{
+    text-align: center;
+    color: yellow;
+    background-color: green;
+}
+a.menu{
+    display: inline-block;
+    background-color: green;
+    border:1px solid white;
+    color: yellow;
+    width:10%;
+}
+a.menu:hover{
+    background-color: yellow;
+    color:green;
+    border:1px solid black;
+}
+a.this_page{
+    display: inline-block;
+    background-color: yellow;
+    border:1px solid black;
+    color: green;
+    width:10%;
 }
