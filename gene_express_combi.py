@@ -10,6 +10,7 @@ parser.add_argument("metadata", help='input experimental metadata file')
 parser.add_argument("exp_matrix", help='input gene expression matrix')
 args = parser.parse_args()
 
+# get filenames from user input
 metadata_file = args.metadata
 matrix_file = args.exp_matrix
 
@@ -43,7 +44,9 @@ for item in header_names:
     if len(item) > 1:
         output_header.append(item + "_" + data_dict[item])
 print(output_header)
+
 # Write output file
+# Add header with formatting then add the rest of the data back
 with open("gene_name_output.txt", "w") as output:
     output.write("\t")
     for item in output_header:
