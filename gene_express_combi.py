@@ -45,8 +45,10 @@ for item in header_names:
 print(output_header)
 # Write output file
 with open("gene_name_output.txt", "w") as output:
+    output.write("\t")
     for item in output_header:
         output.write(item + "\t")
+    output.write("\n")
     for line in matrix[1:]:
         output.write(line)
 
