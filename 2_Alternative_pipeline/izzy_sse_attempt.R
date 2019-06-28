@@ -7,19 +7,18 @@ library(zinbwave)
 
 # Load in data (set wd to project directory first)
 gene_expression_matrix <- read.delim("./combined_data.txt", row.names = 1, header = TRUE)
-info_file <- read.delim("./2_Alternative_pipeline/Full_Experiment_metadata.txt")
+info_file <- read.delim("./2_Alternative_pipeline/SraRunTable_all.txt")
 
 truncated_expression_matrix <- gene_expression_matrix[1:22085,]
-gene_expression_matrix <- data.frame(gene_expression_matrix)
+# gene_expression_matrix <- data.frame(gene_expression_matrix)
 # start=0, end=466
 
 # Remove all 0 expressed genes from the dataset:
 truncated_expression_matrix <- truncated_expression_matrix[rowSums(truncated_expression_matrix[, -1])>0, ]
 truncated_expression_matrix
 # Create SummarizedExperiment for Zinbwave input
-sum_exp <- makeSummarizedExperimentFromDataFrame(df = gene_expression_matrix, start.field=1:1, end.field=22088:466,ignore.strand=FALSE,
-                    
-                                      starts.in.df.are.0based = TRUE)
+#sum_exp <- makeSummarizedExperimentFromDataFrame(df = gene_expression_matrix, start.field=1:1, end.field=22088:466,ignore.strand=FALSE,
+#                                      starts.in.df.are.0based = TRUE)
 
 # Go straight to making a summarisedexperiment?
 sum_exp <- SummarizedExperiment(
@@ -38,23 +37,16 @@ sum_exp
 # data. 
 # Zimbwave takes a SummarizedExperiment and returns a SingleCellExperiment object
 # k=how many latent variables we want to infer from the data, epsilon=num_genes
-sce <- zinbwave(sum_exp, K=2, epsilon=22085)
+sce <- zinbwave(sum_exp, K=10, epsilon=21625)
 
 # Data normalisation with Scater
 # Takes SingleCellExperiment input
 norm_sce <- normalize(sce)
 plotExplanatoryVariables(norm_sce)
 
-# remove features with duplicated names
-norm_sce <- norm_sce[!duplicated(rowData(norm_sce)$feature_symbol), ]
-
-
 # SC3 clustering 
 # define feature names in feature_symbol column
 rowData(norm_sce)$feature_symbol <- rownames(norm_sce)
-
-# remove features with duplicated names
-sce <- norm_sce[!duplicated(rowData(norm_sce)$feature_symbol), ]
 
 # plot PCA 
 plotPCA(sce, colour_by = "cell_type")
