@@ -4,6 +4,13 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
+    <orderEntry type="library" name="R User Library" level="project" />
+    <orderEntry type="library" name="R Skeletons" level="application" />
+=======
+    <orderEntry type="library" name="R Skeletons" level="application" />
+    <orderEntry type="library" name="R User Library" level="project" />
+>>>>>>> 540269e29835a608001e2924d1e693229acc989b
   </component>
   <component name="TestRunnerService">
     <option name="projectConfiguration" value="pytest" />
