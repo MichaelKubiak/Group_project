@@ -6,8 +6,8 @@ library(SC3)
 library(zinbwave)
 
 # Load in data (set wd to project directory first)
-gene_expression_matrix <- read.delim("./test_combined_data", row.names = 1, header = TRUE)
-info_file <- read.delim("test_sra_run.txt")
+gene_expression_matrix <- read.delim("./combined_data", row.names = 1, header = TRUE)
+info_file <- read.delim("2_Alternative_pipeline/SraRunTable_all.txt")
 
 truncated_expression_matrix <- gene_expression_matrix[1:22085,]
 # gene_expression_matrix <- data.frame(gene_expression_matrix)
@@ -37,7 +37,7 @@ sum_exp
 # data. 
 # Zimbwave takes a SummarizedExperiment and returns a SingleCellExperiment object
 # k=how many latent variables we want to infer from the data, epsilon=num_genes
-sce <- zinbwave(sum_exp, K=10, epsilon=13437)
+sce <- zinbwave(sum_exp, K=14, epsilon=13437)
 
 # Data normalisation with Scater
 # Takes SingleCellExperiment input
@@ -59,13 +59,13 @@ rowData(norm_sce)$feature_symbol
 plotPCA(sce, colour_by = "cell_type")
 
 # SC3 
-sce <- sc3(norm_sce, ks = 2:15, biology = TRUE)
+sce <- sc3(norm_sce, ks = 9:19, biology = TRUE)
 
 # Display browser based interactive graphing.
 sc3_interactive(sce)
 
 # create xls file of results
-sc3_export_results_xls(sce)
+# sc3_export_results_xls(sce)
 
 col_data <- colData(sce)
 head(col_data[ , grep("sc3_", colnames(col_data))])
