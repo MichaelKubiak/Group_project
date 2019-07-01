@@ -1,5 +1,4 @@
 AvgSpotLen	BioSample	Experiment	Instrument	LoadDate	MBases	MBytes	Run	SRA_Sample	Sample_Name	age	c1_chip_id	cell_type	experiment_sample_name	tissue	Assay_Type	BioProject	Center_Name	Consent	DATASTORE_filetype	DATASTORE_provider	InsertSize	LibraryLayout	LibrarySelection	LibrarySource	Organism	Platform	ReleaseDate	SRA_Study	source_name
-
 150	SAMN03486330	SRX995865	NextSeq 500	2015-04-23	296	137	SRR1974547	SRS910637	GSM1657875	postnatal 54 years	1772078217	hybrid	AB_S8	cortex	RNA-Seq	PRJNA281204	GEO	public	sra	ncbi	0	PAIRED	cDNA	TRANSCRIPTOMIC	Homo sapiens	ILLUMINA	2015-05-20	SRP057196	Brain
 150	SAMN03486331	SRX995866	NextSeq 500	2015-04-23	386	179	SRR1974548	SRS910636	GSM1657876	postnatal 54 years	1772078217	oligodendrocytes	AB_S8	cortex	RNA-Seq	PRJNA281204	GEO	public	sra	ncbi	0	PAIRED	cDNA	TRANSCRIPTOMIC	Homo sapiens	ILLUMINA	2015-05-20	SRP057196	Brain
 150	SAMN03486332	SRX995867	NextSeq 500	2015-04-15	305	145	SRR1974549	SRS910635	GSM1657877	postnatal 54 years	1772078217	oligodendrocytes	AB_S8	cortex	RNA-Seq	PRJNA281204	GEO	public	sra	ncbi	0	PAIRED	cDNA	TRANSCRIPTOMIC	Homo sapiens	ILLUMINA	2015-05-20	SRP057196	Brain
