@@ -54,4 +54,3 @@ with open("gene_name_output.txt", "w") as output:
     output.write("\n")
     for line in matrix[1:]:
         output.write(line)
-
