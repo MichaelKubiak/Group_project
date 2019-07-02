@@ -37,7 +37,7 @@ sum_exp
 # data. 
 # Zimbwave takes a SummarizedExperiment and returns a SingleCellExperiment object
 # k=how many latent variables we want to infer from the data, epsilon=num_genes
-sce <- zinbwave(sum_exp, K=14, epsilon=13437)
+sce <- zinbwave(sum_exp, K=14, epsilon=21625)
 
 # Data normalisation with Scater
 # Takes SingleCellExperiment input
