@@ -17,3 +17,19 @@ reciprocal.dist <- as.dist(1-do.call(rbind, mclapply(cell.names, function(nam1){
   }))
 },mc.cores=4)),upper=FALSE)
 write.table(reciprocal.dist,file="./Group_project/recip_dist",sep="\t")
+
+
+direct.dist.rec <- as.dist(read.table("recip_dist", sep="\t"))
+
+library(tsne)
+dim.red.dist.rec <- tsne(direct.dist.rec, max_iter = 10000)
+
+
+library(mclust)
+BIC.rec <- Mclust(dim.red.dist.rec,G=1:40, modelNames = c("EII","VVI","VII","EEE","EEI","EEV","VEI","VEV","EVI","VVV"), prior = priorControl())
+svg(filename="./Group_project/BIC.svg",
+    width=5,
+    height=4,
+    pointsize=10)
+plot(BIC.rec)
+dev.off()
