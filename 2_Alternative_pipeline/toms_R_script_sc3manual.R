@@ -14,8 +14,8 @@ library(SC3)
 library(zinbwave)
 
 
-gene_expression_matrix <- read.delim("/home/tsc21/Documents/BS7120/Group_project/combined_data", row.names = 1, header = TRUE)
-info_file <- read.delim("/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/SraRunTable_all.txt")
+gene_expression_matrix <- read.delim("/home/tsc21/Documents/BS7120/Group_project/Data/combined_data", row.names = 1, header = TRUE)
+info_file <- read.delim("/home/tsc21/Documents/BS7120/Group_project/Data/SraRunTable_all.txt")
 
 
 truncated_expression_matrix <- gene_expression_matrix[1:22085,]
@@ -39,6 +39,7 @@ sum_exp <- SummarizedExperiment(
 )
 
 rowData(sum_exp)$feature_symbol <- rownames(sum_exp)
+
 
 # printing the summarisedexperiment data
 sum_exp
@@ -136,6 +137,9 @@ sc3_export_results_xls(sce)
 
 plotPCA(sce, colour_by = "cell_type")
 
+plotTSNE(sum_exp_test, colour_by = "sc3_10_clusters", rerun = TRUE)
+
+
 
 
 tsne_plot_10 <- plotTSNE(sce, colour_by = "sc3_10_clusters", rerun = TRUE)
@@ -145,6 +149,24 @@ tsne_plot_10
 png(filename="/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/tsne_plot_10.png", width=650, height=500)
 plot(tsne_plot_10)
 dev.off()
+
+
+
+#sum_exp_test <- SingleCellExperiment(
+#  assays = list(
+#    counts = as.matrix(truncated_expression_matrix),
+#    logcounts = log2(as.matrix(truncated_expression_matrix) + 1)
+#  ), 
+#  colData = info_file
+#)
+
+#rowData(sum_exp_test)$feature_symbol <- rownames(sum_exp_test)
+
+#tsne_pre_sc3 <- plotTSNE(sum_exp_test, rerun = TRUE)
+
+#png(filename="/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/tsne_pre_sc3.png", width=650, height=500)
+#plot(tsne_pre_sc3)
+#dev.off()
 
 
 #plotExpression(sce, rownames(sce))
