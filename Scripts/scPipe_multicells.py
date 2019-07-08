@@ -51,7 +51,6 @@ print("SRR file appears to contain", str(count), "accessions. Beginning scPipe a
 
 # totals for progress messages
 total_accessions = len(SRR_acc_list)
-print(total_accessions)
 acc_number = 1
 
 # Create SRR named directory where necessary
@@ -72,6 +71,7 @@ for accession in SRR_acc_list:
     os.remove(accession + "out.map.bam")
     os.remove(accession + "out.aln.bam")
     os.remove(accession + "read_index.00.b.tab")
+    os.remove(accession + "read_index.00.b.array")
     print("Completed", acc_number, "of", total_accessions, ". remaining accessions:", remaining_accessions)
     os.chdir("../")
     acc_number += 1

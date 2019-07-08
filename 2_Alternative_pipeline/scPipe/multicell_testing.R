@@ -10,20 +10,18 @@ parser$add_argument('--SRR', help='SRR prefix on input/output files')
 arguments <- parser$parse_args()
 prefix <- arguments[1]
 
-data_dir = "/home/izzy_r/Group_project/Project_repo/Group_project/testing/"
-#barcode_annotation_fn <- # file.path("ADD THE BARCODE CSV HERE WHEN THOMAS HAS DONE IT!!!!!!!")
-
+data_dir = "."
 
 # Reference file path:
-reference_fasta = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/Reference_genome/ncbi/Chr38/GRCh38_latest_genomic.fna")  
-reference_anno = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/Reference_genome/ncbi/Chr38/Homo_sapiens.GRCh38.97.gff3") 
+reference_fasta = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/Reference_genome/ensembl/Homo_sapiens.GRCh38.dna.primary_assembly.fa")  
+reference_anno = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/Reference_genome/ensembl/Homo_sapiens.GRCh38.97.chr.gff3") 
 
 # breakdown file names into constituent parts for 
 fastq_file1 = paste(prefix, "_1.fastq.gz", sep = "")
-fq_R1 = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/DATA_fastQ", fastq_file1) 
+fq_R1 = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/DATA_fastQ/Test_fastq/", fastq_file1) 
 
 fastq_file2 = paste(prefix, "_2.fastq.gz", sep = "")
-fq_R2 = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/DATA_fastQ", fastq_file2)
+fq_R2 = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/DATA_fastQ/Test_fastq/", fastq_file2)
 
 # Fastq reformatting
 # Rename combined fastQ:
@@ -50,14 +48,22 @@ Rsubread::align(index=file.path(data_dir, read_index),
 # Assigning reads to annotated exons
 out.map.bam <- paste(prefix, "out.map.bam", sep = "")
 out.map.bam
-sc_exon_mapping(file.path(data_dir, "out.aln.bam"),
+sc_exon_mapping(file.path(data_dir, out.aln.bam),
                 file.path(data_dir, out.map.bam),
-                reference_anno, bc_len = 0, UMI_len = 0)
+                reference_anno, bc_len = 4, UMI_len = 0)
 
 # Demultiplexing data
-sc_demultiplex(file.path(data_dir, out.map.bam), data_dir, barcode_annotation_fn,
-               has_UMI=FALSE)
+# create outbarcode.csv
+bc_anno_csv = paste(prefix, "barcode.csv", sep = "")
+sc_detect_bc(combined_fastq.gz,
+             outcsv = bc_anno_csv,
+             bc_len = 4, max_reads = 3000000)
 
+# locate the barcode file
+barcode_annotation_fn <- file.path(data_dir, bc_anno_csv)
+
+# Demultiplexing
+sc_demultiplex(file.path(data_dir, out.map.bam), data_dir, barcode_annotation_fn, has_UMI=FALSE)
+
+# Gene counting step
 sc_gene_counting(data_dir, barcode_annotation_fn)
-
-
