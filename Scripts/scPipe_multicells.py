@@ -20,12 +20,11 @@ R_script = "/home/izzy_r/Group_project/Project_repo/Group_project/2_Alternative_
 # Collect the accession numbers the FASTQ data is downloaded from
 SRR_acc_filepath = args.SRR_acc_list
 
+# Find and process the accession list provided by the user
 if os.path.isfile(SRR_acc_filepath):
     print("SRR accession file located.")
-
 else:
     sys.exit("ERROR: no SRR accession file located. Check the path and try again.")
-
 with open(SRR_acc_filepath) as SRR_accs:
     input_lines = SRR_accs.readlines()
 
@@ -49,8 +48,9 @@ print("SRR file appears to contain", str(count), "accessions. Beginning scPipe a
 
 
 # Running the R script:
+
+# totals for progress messages
 total_accessions = len(SRR_acc_list)
-print(total_accessions)
 acc_number = 1
 
 # Create SRR named directory where necessary
@@ -66,7 +66,12 @@ for accession in SRR_acc_list:
     os.chdir("./" + accession)
     # Run the R script with accession number for prefixes (See multicell_testing.R for further information)
     subprocess.run(["Rscript", R_script, "--SRR", accession])
+    # Remove large files that are not required
     os.remove(accession + "combined_fastq.gz")
+    os.remove(accession + "out.map.bam")
+    os.remove(accession + "out.aln.bam")
+    os.remove(accession + "read_index.00.b.tab")
+    os.remove(accession + "read_index.00.b.array")
     print("Completed", acc_number, "of", total_accessions, ". remaining accessions:", remaining_accessions)
     os.chdir("../")
     acc_number += 1

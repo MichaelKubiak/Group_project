@@ -2,11 +2,14 @@
 
 import gzip
 <<<<<<< HEAD
+<<<<<<< HEAD
 with gzip.open("SRR1974543_1.fastq.gz", "rb") as f:
     for lines in f:
         if lines.startswith(@ or +):
             print(lines)
 =======
+=======
+>>>>>>> 0c4ca9aa8f3f227ab77b75c62c7561772387ad58
 import shutil
 import os
 
@@ -46,4 +49,7 @@ for entities in files:
         files_done += 1
         print("files:", files_done, "/", files_to_do)
 
+<<<<<<< HEAD
+>>>>>>> 0c4ca9aa8f3f227ab77b75c62c7561772387ad58
+=======
 >>>>>>> 0c4ca9aa8f3f227ab77b75c62c7561772387ad58
