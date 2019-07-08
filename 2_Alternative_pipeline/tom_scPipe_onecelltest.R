@@ -9,12 +9,12 @@ library(Rsubread)
 data_dir = "/home/tsc21/Documents/BS7120/Group_project/scPipe/"
 
 # file path:
-reference_fasta = file.path("/home/tsc21/Documents/BS7120/Group_project/scPipe/Reference_genome/Homo_sapiens.GRCh38.dna.primary_assembly.fa")  
+reference_fasta = file.path("/home/tsc21/Documents/BS7120/Group_project/scPipe/Reference_genome/Homo_sapiens.GRCh38.dna.toplevel.fa")  
 reference_anno = file.path("/home/tsc21/Documents/BS7120/Group_project/scPipe/Reference_genome/Homo_sapiens.GRCh38.97.chr.gff3") 
 # barcode_annotation_fn = system.file("extdata", "barcode_anno.csv", package = "scPipe")
 
-fq_R1 = file.path("/home/tsc21/Documents/BS7120/Group_project/scPipe/Test/Cell1.fastq") 
-fq_R2 = file.path("/home/tsc21/Documents/BS7120/Group_project/scPipe/Test/cell2.fastq")
+fq_R1 = file.path("/home/tsc21/Documents/BS7120/Group_project/scPipe/Test/cell1_1.fastq") 
+fq_R2 = file.path("/home/tsc21/Documents/BS7120/Group_project/scPipe/Test/cell1_2.fastq")
 
 # Fastq reformatting
 sc_trim_barcode(file.path(data_dir, "combined.fastq.gz"),

@@ -11,6 +11,7 @@ for entities in files:
     if entities.endswith(".gz"):
         with gzip.open(entities, "rb") as f:
             file_content = f.readlines()
+            f.close()
 
 #with open("SRR1974543_1.fastq") as g:
 #    something = g.readlines()
@@ -33,8 +34,9 @@ for entities in files:
 
         with open(filename,"w") as h:
             h.writelines(fastq_list)
+            h.close()
 
 
-
-        with open(filename, 'rb') as f_in, gzip.open( + '.gz', 'wb') as f_out:
+        with open(filename, 'rb') as f_in, gzip.open(filename + '.gz', 'wb') as f_out:
             shutil.copyfileobj(f_in, f_out)
+            f_out.close()
