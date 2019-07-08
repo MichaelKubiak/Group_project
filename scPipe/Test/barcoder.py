@@ -6,11 +6,16 @@ import re
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 for entities in files:
     if entities.endswith(".gz"):
         with gzip.open(entities, "rb") as f:
             file_content = f.readlines()
             f.close()
+=======
+with gzip.open("SRR1974543_2.fastq.gz", "rb") as f:
+    file_content = f.readlines()
+>>>>>>> parent of c2ddd11... new_barcode_file
 =======
 with gzip.open("SRR1974543_2.fastq.gz", "rb") as f:
     file_content = f.readlines()
@@ -34,6 +39,7 @@ for lines in file_content:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         with open(filename,"w") as h:
             h.writelines(fastq_list)
             h.close()
@@ -42,6 +48,10 @@ for lines in file_content:
         with open(filename, 'rb') as f_in, gzip.open(filename + '.gz', 'wb') as f_out:
             shutil.copyfileobj(f_in, f_out)
             f_out.close()
+=======
+with open("cell1.2.fastq","w") as h:
+    h.writelines(fastq_list)
+>>>>>>> parent of c2ddd11... new_barcode_file
 =======
 with open("cell1.2.fastq","w") as h:
     h.writelines(fastq_list)
