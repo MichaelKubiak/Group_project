@@ -142,7 +142,7 @@ plotTSNE(sum_exp_test, colour_by = "sc3_10_clusters", rerun = TRUE)
 
 
 
-tsne_plot_10 <- plotTSNE(sce, colour_by = "sc3_10_clusters", rerun = TRUE)
+tsne_plot_10 <- plotTSNE(sce, colour_by = "sc3_10_clusters", rerun = TRUE, ncomponents = 3)
 
 tsne_plot_10
 
