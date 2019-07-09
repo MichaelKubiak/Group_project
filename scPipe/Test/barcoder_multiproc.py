@@ -69,6 +69,10 @@ if __name__ == "__main__":
 
     barcoding_mp(files,files_done,files_to_do)
 
+    with open("done.done","w") as z:
+        z.write("done")
+        z.close()
+
 
 
 
