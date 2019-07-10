@@ -3,24 +3,24 @@ library(SingleCellExperiment)
 data_dir = "."
 
 # file path:
-reference_fasta = file.path("../Reference_genome/ncbi/Chr38/GRCh38_latest_genomic.fna")  
-reference_anno = file.path("../Reference_genome/ncbi/Chr38/Homo_sapiens.GRCh38.97.gff3") 
+reference_fasta = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/Reference_genome/ensembl/Homo_sapiens.GRCh38.dna.primary_assembly.fa")  
+reference_anno = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/Reference_genome/ensembl/Homo_sapiens.GRCh38.97.chr.gff3") 
 # barcode_annotation_fn = system.file("extdata", "barcode_anno.csv", package = "scPipe")
 
-fq_R1 = file.path("../DATA_fastQ/SRR1975007_1.fastq.gz") 
-fq_R2 = file.path("../DATA_fastQ/SRR1975007_2.fastq.gz")
-
+fq_R1 = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/DATA_fastQ/Multitest/SRR1974550_1.fastq.gz") 
+fq_R2 = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/DATA_fastQ/Multitest/SRR1974550_2.fastq.gz")
 # Fastq reformatting
 sc_trim_barcode(file.path(data_dir, "combined.fastq.gz"),
                 fq_R1,
                 fq_R2,
-                read_structure = list(bs1=0, bl1=10, bs2=0, bl2=10, us=0, ul=0))
+                read_structure = list(bs1=0, bl1=4, bs2=0, bl2=4, us=0, ul=0))
 
 
-Rsubread::buildindex(basename=file.path(data_dir, "read_index"), reference=reference_fasta, 
-                     gappedIndex = TRUE, indexSplit = TRUE)
+# Rsubread::buildindex(basename=file.path(data_dir, "read_index"), reference=reference_fasta, 
+#                      gappedIndex = TRUE, indexSplit = TRUE)
 
-Rsubread::align(index=file.path(data_dir, "read_index"),
+index = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/testing/index/")
+Rsubread::align(index=file.path(index, "read_index"),
                 readfile1=file.path(data_dir, "combined.fastq.gz"),
                 output_file=file.path(data_dir, "out.aln.bam"), 
                 type=0, nthreads=3 )
@@ -29,7 +29,7 @@ Rsubread::align(index=file.path(data_dir, "read_index"),
 # Assigning reads to annotated exons
 sc_exon_mapping(file.path(data_dir, "out.aln.bam"),
                 file.path(data_dir, "out.map.bam"),
-                reference_anno, bc_len = 0, UMI_len = 0)
+                reference_anno, bc_len = 4, UMI_len = 0)
 
 
 # De-multiplexing data and counting genes
