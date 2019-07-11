@@ -29,13 +29,13 @@ def add_to_lines(starting_lines, added_lines):
 lines = []
 i = 0
 files = os.listdir(args.input_folder)
-
+print(files)
 # for each file found
 for file in files:
     # check that it is the correct type of file
     if file.endswith(".csv"):
         # open the file such that it will be safely closed
-        with open(file) as nextcsv:
+        with open(args.input_folder + "/" + file) as nextcsv:
             # if this is the first file
             if(i == 0):
                 # put the file name at the top of the column
