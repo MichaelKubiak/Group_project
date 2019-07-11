@@ -1,4 +1,3 @@
-
 function getWidth(document) {
   return Math.max(
     document.body.scrollWidth,

@@ -12,13 +12,15 @@ parser$add_argument("--clustering", "-c", action="store_true", help="perform the
 parser$add_argument("--spanning", "-s", action="store_true", help="perform the spanning tree section")
 parser$add_argument("--pca","-p", action="store_true", help="perform the pca section")
 
-arguments<-parser$parse_args()
+arguments<-parser$parse_args("../neurons")
 
 # read in expression count matrix
 counts<-read.delim(arguments$Input,sep="\t",header = TRUE, row.names=1)
+nongene<-c("no_feature ","ambiguous ","alignment_not_unique ")
+counts<- counts[!rownames(counts) %in% nongene,]
 
 # filter the count matrix, removing cells with fewer than 1800 genes, genes with fewer than 1 read, and genes that are not detected in any cells
-counts <- clean.counts(counts, min.reads = 1,min.detected = 1)
+counts <- clean.counts(counts, min.lib.size=1800, min.reads = 1,min.detected = 1)
 # build error models 
 models <- scde.error.models(counts, n.cores=4,threshold.segmentation = TRUE, save.crossfit.plots = FALSE, save.model.plots = FALSE)
 
@@ -54,6 +56,7 @@ write.table(dl, file=paste("dl",arguments$Input,sep="_"),sep="\t")
 direct.dist.mat <- 1-Reduce("+",dl)/length(dl)
 # turn that matrix into a dist object for use by tsne
 direct.dist <- as.dist(direct.dist.mat)
+
 #clustering section
 if (arguments$clustering){
   # dimensionally reduce the expression distance matrix to 3 dimensions using tsne
@@ -72,13 +75,7 @@ if (arguments$clustering){
   # perform clustering on the dimensionally reduced data
   clust <- Mclust(dim.red.dist,G=1:40, modelNames = c("EII","VVI","VII","EEE","EEI","EEV","VEI","VEV","EVI","VVV"), prior = priorControl())
   #output Mclust object to file
-  tryCatch({
-    write.csv(clust, file=paste("clustering",arguments$Input,sep="_"), row.names=FALSE)
-  }, error = function(cond){
-    print(cond)
-  }, warning = function(cond){
-    print(cond)
-  })
+  write.csv(clust, file=paste("clustering",arguments$Input,sep="_"), row.names=FALSE)
   # output a Baysian Information Criterion graph that can be used to determine how many clusters are present
   svg(filename=paste("BIC",arguments$Input,".svg",sep="_"),
       width=20,
@@ -97,33 +94,31 @@ if (arguments$clustering){
 }
 if (arguments$spanning){
   #produce a minimum spanning tree based on the weighted adjacency matrix (distance matrix)
-  dist.graph<- graph.adjacency(as.matrix(direct.dist.mat),weighted=T)
-  min.span.tree<-mst(dist.graph)
+  dist.graph <- graph.adjacency(as.matrix(direct.dist.mat),weighted=T, mode="lower")
+  min.span.tree <- mst(dist.graph)
   #colour vertices by membership
   com<-cluster_walktrap(min.span.tree)
   V(min.span.tree)$color<-com$membership+1
   #get longest path
   long<-which(direct.dist.mat==max(direct.dist.mat),arr.ind=TRUE)
-  long.edges<-shortest_paths(min.span.tree, from=116, to=125)
+  long.edges<-shortest_paths(min.span.tree, from=long[1,1], to=long[1,2])
   #colour edges on the path
   E(min.span.tree)$color<-"gray"
   E(min.span.tree, path=unlist(long.edges$vpath))$color<-"red"
   #output spanning tree to file
-  tryCatch({
-    write.graph(min.span.tree,file=paste("spantree",arguments$Input,sep="_"))
-  }, error = function(cond){
-    print(cond)
-  }, warning = function(cond){
-    print(cond)
-  })
+  write.graph(min.span.tree,file=paste("spantree",arguments$Input,sep="_"))
   # produce an image of the tree
   svg(filename=paste("min_span",arguments$Input,".svg",sep="_"),
       width=20,
       height=20,
       pointsize=10)
-  plot (min.span.tree,vertex.size=1)
+  plot (min.span.tree,vertex.size=4, vertex.label=NA)
   dev.off()
 }
+
+#pca section
 if(arguments$pca){
-  #TODO: perform pca
+  pca<-PCA(t(direct.dist.mat))
+  plot3d(pca$ind$coord)
+  write.csv(pca)
 }
