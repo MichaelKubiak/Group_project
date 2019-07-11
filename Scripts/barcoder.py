@@ -5,40 +5,41 @@ import shutil
 import os
 
 # import a list of files
-
-
 files = os.listdir(".")
 
+
 files_done = 0
-x = 0
 files_to_do = len(files)
-for entities in files:
-    filename = entities.split(".")
+for entity in files:
+    filename = entity.split(".")
     filename = filename[0] + ".fastq"
-    if entities.endswith(".gz"):
-        with gzip.open(entities, "rb") as f:
-            file_content = f.readlines()
-            f.close()
+    if entity.endswith(".gz"):
+        print(entity)
+        # with gzip.open(entities, "rb") as f:
+        #     file_content = f.readlines()
+        #     f.close()
 
         fastq_list = []
         print("starting file:", str(files_done + 1), filename)
-        for lines in file_content:
-            lines = str(lines)
-            lines = lines.lstrip("b'")
-            lines = lines.rstrip("\n'")
-            lines += "\n"
-            if not (lines.startswith("@") or lines.startswith("+")):
-                string = "TRUE" + lines
-                fastq_list += string
-            else:
-                fastq_list += lines
+        with gzip.open(entity, "rb") as f:
+            for lines in f:
+                with open(filename, "a+") as h:
+                    lines = str(lines)
+                    lines = lines.lstrip("b'")
+                    lines = lines.rstrip("\n'")
+                    lines += "\n"
+                    if not (lines.startswith("@SRR") or lines.startswith("+")):
+                        string = "TRUE" + lines
+                        h.writelines(string)
+                    else:
+                        h.writelines(lines)
 
-        with open(filename,"w") as h:
-            h.writelines(fastq_list)
-            h.close()
+        # with open(filename, "w") as h:
+        #     h.writelines(fastq_list)
+        #     h.close()
 
         outfile = filename + ".gz"
-        with open("done_files.txt", "w") as p:
+        with open("done_files.txt", "a") as p:
             p.write(outfile + "\n")
 
         with open(filename, 'rb') as f_in, gzip.open(filename + '.gz', 'wb') as f_out:
@@ -51,4 +52,3 @@ for entities in files:
 
         files_done += 1
         print("files:", files_done, "/", files_to_do)
-        x += 1
