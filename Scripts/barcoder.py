@@ -1,29 +1,27 @@
-#comma deliniated with a header
+# Add in an artificial barcode to each fastQ file for scPipe to work on not quite 'raw' data.
 
 import gzip
-<<<<<<< HEAD
-<<<<<<< HEAD
-with gzip.open("SRR1974543_1.fastq.gz", "rb") as f:
-    for lines in f:
-        if lines.startswith(@ or +):
-            print(lines)
-=======
-=======
->>>>>>> 0c4ca9aa8f3f227ab77b75c62c7561772387ad58
 import shutil
 import os
 
-files = os.listdir("/home/izzy_r/Group_project/Project_repo/Group_project/DATA_fastQ/Test_fastq")
+# import a list of files
+
+
+files = os.listdir(".")
 
 files_done = 0
+x = 0
+files_to_do = len(files)
 for entities in files:
+    filename = entities.split(".")
+    filename = filename[0] + ".fastq"
     if entities.endswith(".gz"):
         with gzip.open(entities, "rb") as f:
             file_content = f.readlines()
+            f.close()
 
         fastq_list = []
-        files_to_do = len(files)
-        print("starting file:", str(files_done + 1))
+        print("starting file:", str(files_done + 1), filename)
         for lines in file_content:
             lines = str(lines)
             lines = lines.lstrip("b'")
@@ -35,21 +33,22 @@ for entities in files:
             else:
                 fastq_list += lines
 
-        filename = entities.split(".")
-        filename = filename[0] + ".fastq"
-
         with open(filename,"w") as h:
             h.writelines(fastq_list)
+            h.close()
 
-
+        outfile = filename + ".gz"
+        with open("done_files.txt", "w") as p:
+            p.write(outfile + "\n")
 
         with open(filename, 'rb') as f_in, gzip.open(filename + '.gz', 'wb') as f_out:
             shutil.copyfileobj(f_in, f_out)
+            f_out.close()
+            f_in.close()
+        gzip_filename = filename + ".gz"
+        os.rename(gzip_filename, "Barcoded/" + gzip_filename)
         os.remove(filename)
+
         files_done += 1
         print("files:", files_done, "/", files_to_do)
-
-<<<<<<< HEAD
->>>>>>> 0c4ca9aa8f3f227ab77b75c62c7561772387ad58
-=======
->>>>>>> 0c4ca9aa8f3f227ab77b75c62c7561772387ad58
+        x += 1
