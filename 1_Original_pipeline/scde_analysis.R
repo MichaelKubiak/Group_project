@@ -18,6 +18,7 @@ arguments<-parser$parse_args("../neurons")
 counts<-read.delim(arguments$Input,sep="\t",header = TRUE, row.names=1)
 nongene<-c("no_feature ","ambiguous ","alignment_not_unique ")
 counts<- counts[!rownames(counts) %in% nongene,]
+
 # filter the count matrix, removing cells with fewer than 1800 genes, genes with fewer than 1 read, and genes that are not detected in any cells
 counts <- clean.counts(counts, min.lib.size=1800, min.reads = 1,min.detected = 1)
 # build error models 
@@ -55,6 +56,7 @@ write.table(dl, file=paste("dl",arguments$Input,sep="_"),sep="\t")
 direct.dist.mat <- 1-Reduce("+",dl)/length(dl)
 # turn that matrix into a dist object for use by tsne
 direct.dist <- as.dist(direct.dist.mat)
+
 #clustering section
 if (arguments$clustering){
   # dimensionally reduce the expression distance matrix to 3 dimensions using tsne
@@ -113,9 +115,10 @@ if (arguments$spanning){
   plot (min.span.tree,vertex.size=4, vertex.label=NA)
   dev.off()
 }
+
+#pca section
 if(arguments$pca){
   pca<-PCA(t(direct.dist.mat))
   plot3d(pca$ind$coord)
   write.csv(pca)
-  
 }

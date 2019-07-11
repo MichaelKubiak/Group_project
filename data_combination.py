@@ -11,7 +11,8 @@ def add_to_lines(starting_lines, added_lines):
         #split the line from the list to be added by tabs
         split_line = added_lines[j-1].split("\t")
         # append the 2nd column of the file to the lines of the original file
-        starting_lines[j] += "\t" + split_line[1]
+        if len(split_line) >1:
+            starting_lines[j] += "\t" + split_line[1]
     return starting_lines
 
 
