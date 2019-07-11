@@ -8,8 +8,8 @@ import os
 
 parser = argparse.ArgumentParser(description="Script to combine tab separated .csv files containing gene count data into one")
 
-parser.add_argument("folder", help="The folder containing the files that must be combined")
-
+parser.add_argument("input_folder", help="The folder containing the files that must be combined")
+parser.add_argument("output", help="The output path")
 args = parser.parse_args()
 
 # function to add the second column of a list produced from readlines() on a tab separated file to a list from the same type of file
@@ -28,7 +28,7 @@ def add_to_lines(starting_lines, added_lines):
 
 lines = []
 i = 0
-files = os.listdir(args.folder)
+files = os.listdir(args.input_folder)
 
 # for each file found
 for file in files:
@@ -53,5 +53,5 @@ for file in files:
         i += 1
 lines[0] += "\n"
 # open the output file to write the output
-with open("combined_data", "w") as output:
+with open(args.output, "w") as output:
     output.writelines(lines)
