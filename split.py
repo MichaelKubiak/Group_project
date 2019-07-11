@@ -14,7 +14,7 @@ parser.add_argument("information", help="The file containing a table with inform
 parser.add_argument("name_column", help="The name column containing the names of the samples")
 parser.add_argument("split_column", help="The name of the column to be used for splitting")
 parser.add_argument("values", nargs="*", help="The values found in that column corresponding to rows"
-                                                            " to be placed in new files")
+                                              " to be placed in new files")
 parser.add_argument("--output", "-o", nargs="*", help="Output file names")
 
 args = parser.parse_args()
@@ -74,7 +74,7 @@ for j in range(len(names_in_groups)):
         if not names_in_groups[j][i].endswith("\n"):
             names_in_groups[j][i] += "\n"
     if args.output[j]:
-        with open(args.output[j],"w") as output:
+        with open(args.output[j], "w") as output:
             output.writelines(line_groups[j])
     else:
         with open(args.dataset + "_" + args.values[j], "w") as output:

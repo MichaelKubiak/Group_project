@@ -1,6 +1,16 @@
 #! /usr/bin/env python3
+# ---------------------------------------------------------------------------------------------------------
+# Script to combine tab separated .csv files containing gene count data into one
+# ---------------------------------------------------------------------------------------------------------
+import argparse
 import os
 
+
+parser = argparse.ArgumentParser(description="Script to combine tab separated .csv files containing gene count data into one")
+
+parser.add_argument("folder", help="The folder containing the files that must be combined")
+
+args = parser.parse_args()
 
 # function to add the second column of a list produced from readlines() on a tab separated file to a list from the same type of file
 def add_to_lines(starting_lines, added_lines):
@@ -11,14 +21,14 @@ def add_to_lines(starting_lines, added_lines):
         #split the line from the list to be added by tabs
         split_line = added_lines[j-1].split("\t")
         # append the 2nd column of the file to the lines of the original file
-        if len(split_line) >1:
+        if len(split_line) > 1:
             starting_lines[j] += "\t" + split_line[1]
     return starting_lines
 
 
 lines = []
 i = 0
-files = os.listdir(".")
+files = os.listdir(args.folder)
 
 # for each file found
 for file in files:
@@ -45,6 +55,3 @@ lines[0] += "\n"
 # open the output file to write the output
 with open("combined_data", "w") as output:
     output.writelines(lines)
-
-
-
