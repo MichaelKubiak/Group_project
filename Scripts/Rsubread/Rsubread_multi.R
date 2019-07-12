@@ -1,5 +1,4 @@
 #! /usr/bin/Rscript
-library(SingleCellExperiment)
 library(Rsubread)
 library(argparse)
 
@@ -21,7 +20,7 @@ print(isTRUE(rebuild_index))
 
 # Reference file path:
 reference_fasta = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/Reference_genome/ensembl/Homo_sapiens.GRCh38.dna.primary_assembly.fa")  
-reference_anno = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/Reference_genome/ensembl/Homo_sapiens.GRCh38.97.chr.gff3") 
+reference_anno = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/Reference_genome/ensembl/Homo_sapiens.GRCh38.97.chr.gtf") 
 
 # breakdown file names into constituent parts for file renaming
 fastq_file1 = paste(prefix, "_1.fastq.gz", sep = "")
@@ -39,6 +38,7 @@ if (rebuild_index == TRUE){
   index = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/testing/", prefix)
 } else{
   print("using available reference index:")
+  print(prefix)
   index = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/testing/Index")
 }
 
@@ -46,19 +46,10 @@ if (rebuild_index == TRUE){
 print("Rsubread align start")
 out.aln.bam <- paste(prefix, "out.aln.bam", sep = "")
 Rsubread::align(index=file.path(index, "read_index"),
-                readfile1=file.path(data_dir, combined_fastq.gz),
+                readfile1=fq_R1,readfile2=fq_R2,
                 output_file=file.path(data_dir, out.aln.bam), 
                 type=0, nthreads=3 )
 print("Rsubread align end")
-
-# Assigning reads to annotated exons
-print("assign reads to exon start")
-out.map.bam <- paste(prefix, "out.map.bam", sep = "")
-out.map.bam
-sc_exon_mapping(file.path(data_dir, out.aln.bam),
-                file.path(data_dir, out.map.bam),
-                reference_anno, bc_len = 4, UMI_len = 0)
-print("assign reads to exon end")
 
 featurecounting <- Rsubread::featureCounts(files = file.path(data_dir, out.aln.bam),
                                            

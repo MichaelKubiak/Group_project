@@ -1,5 +1,5 @@
 """
-Execute scpipe R script multiple times for a list of accession numbers
+Execute Rsubread R script multiple times for a list of accession numbers
 This script will execute the scPipe R script for each pair of reads into a named directory.
 Outputs from the script appear where your working directory is.
 Before use configure the path for R_script to match your path, as well as any relevant paths in the R script.
@@ -8,6 +8,8 @@ import os
 import sys
 import subprocess
 import argparse
+import shutil
+
 
 def move_index():
     os.rename("read_index.00.b.array", "../Index/read_index.00.b.array")
@@ -93,6 +95,11 @@ for accession in SRR_acc_list:
     else:
         os.mkdir(accession)
 
+    if os.path.exists("CSVs"):
+        print("CSV output will be copied to existing CSVs directory")
+    else:
+        os.mkdir("CSVs")
+
     # Move to the accession directory
     os.chdir("./" + accession)
 
@@ -100,8 +107,9 @@ for accession in SRR_acc_list:
     subprocess.run(["Rscript", R_script, "--SRR", accession, "--build_index", Rindex])
 
     # Remove large files that are not required to save disk space
-    os.remove(accession + "out.map.bam")
     os.remove(accession + "out.aln.bam")
+
+    # copy output csv to csv collection
 
     # Progress statement
     print("Completed", acc_number, "of", total_accessions, ". remaining accessions:", remaining_accessions)
@@ -110,9 +118,13 @@ for accession in SRR_acc_list:
     if rebuild_index and acc_number == 1:
         move_index()
 
+    # Copy the CSV file output to the CSVs location
+    csv_name = accession + "gene_count.csv"
+    shutil.copy(csv_name, "../CSVs/" + csv_name)
+
     # Reset the working directory for the next loop
     os.chdir("../")
     acc_number += 1
 
-# Final 
-print("scPipe analysis completed.")
+# Final
+print("Rsubread analysis completed.")
