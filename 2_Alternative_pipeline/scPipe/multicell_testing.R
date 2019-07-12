@@ -34,7 +34,7 @@ fq_R2 = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/DATA_fa
 # Rename combined fastQ:
 combined_fastq.gz = paste(prefix, "combined_fastq.gz", sep = "")
 # trim barcodes
-print("barcoding start")
+print("trimming start")
 sc_trim_barcode(file.path(data_dir, combined_fastq.gz),
                 fq_R1,
                 fq_R2,
@@ -42,7 +42,6 @@ sc_trim_barcode(file.path(data_dir, combined_fastq.gz),
 print("barcoding end")
 
 # Rsubread build/align to human reference genome if no index present
-index_folder =file.path("/home/izzy_r/Group_project/Project_repo/Group_project/2_Alternative_pipeline/scPipe/reference_index/")
 if (rebuild_index == TRUE){
   print("Building index from reference files")
   Rsubread::buildindex(basename=file.path(data_dir, "read_index"), reference=reference_fasta, 
@@ -50,7 +49,7 @@ if (rebuild_index == TRUE){
   index = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/testing/", prefix)
 } else{
   print("using available reference index:")
-  index = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/testing/Index/")
+  index = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/testing/Index")
 }
 
 
@@ -61,8 +60,7 @@ Rsubread::align(index=file.path(index, "read_index"),
                 readfile1=file.path(data_dir, combined_fastq.gz),
                 output_file=file.path(data_dir, out.aln.bam), 
                 type=0, nthreads=3 )
-print("Rsubread align end
-      ")
+print("Rsubread align end")
 # Assigning reads to annotated exons
 print("assign reads to exon start")
 out.map.bam <- paste(prefix, "out.map.bam", sep = "")
@@ -92,7 +90,3 @@ print("demultiplex data end")
 print("Gene counting start")
 sc_gene_counting(data_dir, barcode_annotation_fn)
 print("Gene counting end")
-
-
-
-

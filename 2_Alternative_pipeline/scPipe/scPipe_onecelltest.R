@@ -7,8 +7,8 @@ reference_fasta = file.path("/home/izzy_r/Group_project/Project_repo/Group_proje
 reference_anno = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/Reference_genome/ensembl/Homo_sapiens.GRCh38.97.chr.gff3") 
 # barcode_annotation_fn = system.file("extdata", "barcode_anno.csv", package = "scPipe")
 
-fq_R1 = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/DATA_fastQ/Multitest/SRR1974550_1.fastq.gz") 
-fq_R2 = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/DATA_fastQ/Multitest/SRR1974550_2.fastq.gz")
+fq_R1 = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/DATA_fastQ/Multitest/Barcoded/SRR1974543_1.fastq.gz") 
+fq_R2 = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/DATA_fastQ/Multitest/Barcoded/SRR1974543_2.fastq.gz")
 # Fastq reformatting
 sc_trim_barcode(file.path(data_dir, "combined.fastq.gz"),
                 fq_R1,
