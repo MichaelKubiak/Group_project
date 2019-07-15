@@ -30,6 +30,7 @@ lines = []
 i = 0
 files = os.listdir(args.input_folder)
 print(files)
+files.sort()
 # for each file found
 for file in files:
     # check that it is the correct type of file
