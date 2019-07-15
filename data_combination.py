@@ -29,6 +29,11 @@ def add_to_lines(starting_lines, added_lines):
 lines = []
 i = 0
 files = os.listdir(args.input_folder)
+<<<<<<< HEAD
+=======
+print(files)
+files.sort()
+>>>>>>> 5566e1cf9659aaf09b210ca91c759e1a0d177fe9
 # for each file found
 for file in files:
     # check that it is the correct type of file
