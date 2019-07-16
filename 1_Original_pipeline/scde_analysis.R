@@ -13,6 +13,7 @@ parser$add_argument("--spanning", "-s", action="store_true", help="perform the s
 parser$add_argument("--pca","-p", action="store_true", help="perform the pca section")
 parser$add_argument("--cores","-r", default=4,help="how many cores to use")
 arguments<-parser$parse_args("combined_data")
+cores<-as.integer(arguments$cores)
 
 # read in expression count matrix
 counts<-read.delim(arguments$Input,sep="\t",header = TRUE, row.names=1)
@@ -23,7 +24,7 @@ counts<- counts[!rownames(counts) %in% nongene,]
 # filter the count matrix, removing cells with fewer than 1800 genes, genes with fewer than 1 read, and genes that are not detected in any cells
 counts <- clean.counts(counts, min.lib.size=1800, min.reads = 1,min.detected = 1)
 # build error models 
-models <- scde.error.models(counts, n.cores=arguments$cores,threshold.segmentation = TRUE, save.crossfit.plots = FALSE, save.model.plots = FALSE)
+models <- scde.error.models(counts, n.cores=cores,threshold.segmentation = TRUE, save.crossfit.plots = FALSE, save.model.plots = FALSE)
 
 # keep only valid cells (where their correlation is positive) in the models
 valid.cells<-models$corr.a > 0
@@ -51,7 +52,7 @@ simulate <- function(i){
   
 }
 # perform the direct dropout simulations using 4 cores
-dl<-mclapply(1:n.simulations,simulate, mc.cores = arguments$cores)
+dl<-mclapply(1:n.simulations,simulate, mc.cores = cores)
 write.table(dl, file=paste("dl",arguments$Input,sep="_"),sep="\t")
 # produce an expression distance matrix for the cells
 direct.dist.mat <- 1-Reduce("+",dl)/length(dl)
@@ -93,6 +94,7 @@ if (arguments$clustering){
   plot(clust$z)
   dev.off()
 }
+
 if (arguments$spanning){
   #produce a minimum spanning tree based on the weighted adjacency matrix (distance matrix)
   dist.graph <- graph.adjacency(as.matrix(direct.dist.mat),weighted=T, mode="lower")

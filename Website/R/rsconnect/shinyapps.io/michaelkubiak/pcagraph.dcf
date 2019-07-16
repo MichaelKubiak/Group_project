@@ -1,0 +1,12 @@
+name: pcagraph
+title: pcagraph
+username:
+account: michaelkubiak
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1031162
+bundleId: 2233201
+url: https://michaelkubiak.shinyapps.io/pcagraph/
+when: 1563196736.86115
+asMultiple: FALSE
+asStatic: FALSE
