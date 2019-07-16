@@ -4,25 +4,26 @@ library(scde)
 library(tsne)
 library(mclust)
 library(igraph)
-library(FactoMineR)
+
 
 parser<-ArgumentParser(description="performs analysis through the pipeline outlined in Darmanis et al")
 parser$add_argument("Input",help="The file to be read")
 parser$add_argument("--clustering", "-c", action="store_true", help="perform the clustering section")
 parser$add_argument("--spanning", "-s", action="store_true", help="perform the spanning tree section")
 parser$add_argument("--pca","-p", action="store_true", help="perform the pca section")
-
-arguments<-parser$parse_args("../neurons")
+parser$add_argument("--cores","-r", default=4,help="how many cores to use")
+arguments<-parser$parse_args("combined_data")
 
 # read in expression count matrix
 counts<-read.delim(arguments$Input,sep="\t",header = TRUE, row.names=1)
+counts
 nongene<-c("no_feature ","ambiguous ","alignment_not_unique ")
 counts<- counts[!rownames(counts) %in% nongene,]
 
 # filter the count matrix, removing cells with fewer than 1800 genes, genes with fewer than 1 read, and genes that are not detected in any cells
 counts <- clean.counts(counts, min.lib.size=1800, min.reads = 1,min.detected = 1)
 # build error models 
-models <- scde.error.models(counts, n.cores=4,threshold.segmentation = TRUE, save.crossfit.plots = FALSE, save.model.plots = FALSE)
+models <- scde.error.models(counts, n.cores=arguments$cores,threshold.segmentation = TRUE, save.crossfit.plots = FALSE, save.model.plots = FALSE)
 
 # keep only valid cells (where their correlation is positive) in the models
 valid.cells<-models$corr.a > 0
@@ -50,7 +51,7 @@ simulate <- function(i){
   
 }
 # perform the direct dropout simulations using 4 cores
-dl<-mclapply(1:n.simulations,simulate, mc.cores = 4)
+dl<-mclapply(1:n.simulations,simulate, mc.cores = arguments$cores)
 write.table(dl, file=paste("dl",arguments$Input,sep="_"),sep="\t")
 # produce an expression distance matrix for the cells
 direct.dist.mat <- 1-Reduce("+",dl)/length(dl)
@@ -118,7 +119,5 @@ if (arguments$spanning){
 
 #pca section
 if(arguments$pca){
-  pca<-PCA(t(direct.dist.mat))
-  plot3d(pca$ind$coord)
-  write.csv(pca)
+  write.table(direct.dist.mat,"distance_matrix_for_pca",sep="\t")
 }

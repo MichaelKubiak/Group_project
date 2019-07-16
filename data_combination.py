@@ -29,8 +29,11 @@ def add_to_lines(starting_lines, added_lines):
 lines = []
 i = 0
 files = os.listdir(args.input_folder)
+<<<<<<< HEAD
+=======
 print(files)
 files.sort()
+>>>>>>> 5566e1cf9659aaf09b210ca91c759e1a0d177fe9
 # for each file found
 for file in files:
     # check that it is the correct type of file
@@ -43,7 +46,6 @@ for file in files:
                 lines.append("\t" + file)
                 # add everything in the file to the lines list (including the row names)
                 lines += nextcsv.readlines()
-                print(lines)
 
             else:
                 lines[0] += "\t" + file
