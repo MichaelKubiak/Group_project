@@ -7,7 +7,7 @@ fluidPage(
   titlePanel("PCA plot")
   sidebarLayout(
     sidebarPanel(
-      
+      colourInput()
     )
   )
   mainPanel(
