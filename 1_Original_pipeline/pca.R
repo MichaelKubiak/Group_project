@@ -10,7 +10,7 @@ parser$add_argument("--cores", "-r", default=4, help="the number of cores to use
 
 args<-parser$parse_args()
 
-ad<-as.data.frame(read.delim("../adult_cells",row.names=1,header=TRUE))
+ad<-as.data.frame(read.delim("neurons",row.names=1,header=TRUE))
 fq<-as.data.frame(read.delim("foetal_cells_quiescent", row.names=1,header=TRUE))
 fr<-as.data.frame(read.delim("foetal_cells_replicating",row.names=1,header=TRUE))
 

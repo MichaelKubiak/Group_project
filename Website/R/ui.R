@@ -1,8 +1,17 @@
 library(shiny)
-library(rgl)
+library(plotly)
+library(colourpicker)
 
 load("./pca_data.RData")
-basicPage(
-  rglwidgetOutput("plot1"),
-  verbatimTextOutput("Hi")
+fluidPage(
+  titlePanel("PCA plot")
+  sidebarLayout(
+    sidebarPanel(
+      
+    )
+  )
+  mainPanel(
+    plotlyOutput("plot1"),
+    verbatimTextOutput("Hi")
+  )
 )
