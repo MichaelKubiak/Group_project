@@ -27,7 +27,7 @@ function(input,output){
     p<-plot_ly(as.data.frame(tsne_plot_10$plot_env$df_to_plot),
                x=~X1,y=~X2,z=~X3, 
                hoverinfo="text", 
-               text=sce$sc3_6_clusters,
+               text=paste( sep= "\n", sce$Run, sce$sc3_6_clusters),
                marker=list(color=cols,size=1),
                type="scatter3d" )
       #layout(scene=scene)
