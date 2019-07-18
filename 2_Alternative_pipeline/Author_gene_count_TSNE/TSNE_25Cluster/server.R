@@ -4,7 +4,7 @@ library(plotly)
 
 
 
-load("/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/scPipe/Test/expression_data.RData")
+load("/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/Author_gene_count_TSNE/author_gene_count_sc3.RData")
 function(input,output){
   output$plot1<-renderPlotly({
     cols<-c()
