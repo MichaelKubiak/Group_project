@@ -4,7 +4,7 @@ library(colourpicker)
 
 #install.packages("colourpicker")
 
-load("/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/scPipe/Test/expression_data.RData")
+load("../author_gene_count_sc3.RData")
 fluidPage(
   titlePanel("tSNE plot for 25 clusters"),
   sidebarLayout(
