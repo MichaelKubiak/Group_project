@@ -4,7 +4,7 @@ library(colourpicker)
 
 #install.packages("colourpicker")
 
-load("../../Author_gene_count_TSNE/author_gene_count_sc3.RData")
+load("./author_gene_count_sc3.RData")
 fluidPage(
   titlePanel("tSNE plot for 5 clusters using the author generated gene counting matrix"),
   sidebarLayout(
