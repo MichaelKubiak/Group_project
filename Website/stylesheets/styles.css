@@ -14,7 +14,7 @@ a.menu{
     background-color: green;
     border:1px solid white;
     color: yellow;
-    width:10%;
+    width:19%;
 }
 a.menu:hover{
     background-color: yellow;
@@ -26,7 +26,7 @@ a.this_page{
     background-color: yellow;
     border:1px solid black;
     color: green;
-    width:10%;
+    width:19%;
 }
 iframe.screensize{
     width:50%;
