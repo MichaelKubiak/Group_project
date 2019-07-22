@@ -11,9 +11,9 @@ parser = argparse.ArgumentParser(description="Script to separate out a specific 
                                              "a specified column of a separate information table about that dataset")
 parser.add_argument("dataset", help="The tsv file to be split")
 parser.add_argument("information", help="The file containing a table with information about the dataset")
-parser.add_argument("name_column", help="The name column containing the names of the samples")
-parser.add_argument("split_column", help="The name of the column to be used for splitting")
-parser.add_argument("values", nargs="*", help="The values found in that column corresponding to rows"
+parser.add_argument("--name_column", "-n", required=True, help="The name column containing the names of the samples")
+parser.add_argument("--split_column", "-s", required=True, help="The name of the column to be used for splitting")
+parser.add_argument("--values", "-v", required=True, nargs="*", help="The values found in that column corresponding to rows"
                                               " to be placed in new files")
 parser.add_argument("--output", "-o", nargs="*", help="Output file names")
 
@@ -69,10 +69,10 @@ for k in range(len(names_in_groups)):
 
                 line_groups[k][i] += "\t" + data[i].split("\t")[j]
 
-for j in range(len(names_in_groups)):
-    for i in range(len(names_in_groups[j])):
-        if not names_in_groups[j][i].endswith("\n"):
-            names_in_groups[j][i] += "\n"
+for j in range(len(line_groups)):
+    for i in range(len(line_groups[j])):
+        if not line_groups[j][i].endswith("\n"):
+            line_groups[j][i] += "\n"
     if args.output[j]:
         with open(args.output[j], "w") as output:
             output.writelines(line_groups[j])

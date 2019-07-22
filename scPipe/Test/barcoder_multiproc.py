@@ -22,7 +22,7 @@ def barcoding(entities, files_done, files_to_do):
             lines = lines.lstrip("b'")
             lines = lines.rstrip("\n'")
             lines += "\n"
-            if not (lines.startswith("@") or lines.startswith("+")):
+            if not (lines.startswith("@SRR") or lines.startswith("+\n")):
                 string = "TRUE" + lines
                 fastq_list += string
             else:

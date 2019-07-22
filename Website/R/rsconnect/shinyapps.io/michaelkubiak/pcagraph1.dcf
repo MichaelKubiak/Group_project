@@ -1,0 +1,13 @@
+name: pcagraph1
+title: pcagraph1
+username:
+account: michaelkubiak
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1031197
+bundleId: 2233246
+url: https://michaelkubiak.shinyapps.io/pcagraph1/
+when: 1563197893.94026
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: shiny_test.R|tree_graph.R

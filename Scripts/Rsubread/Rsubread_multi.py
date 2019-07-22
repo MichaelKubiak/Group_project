@@ -55,26 +55,29 @@ for line in input_lines:
 count = 0
 miscount = 0
 bad_accs = []
+process_accs = []
 for acc in SRR_acc_list:
-    if len(acc) != 10 and not acc.startswith("SRR"):
-        miscount += 0
+    len(acc) < 9
+    len(acc) > 12
+    if 9 > len(acc) > 12 and not acc.startswith("SRR"):
+        miscount += 1
         bad_accs.append(acc)
     else:
+        process_accs.append(acc)
         count += 1
 if miscount > 0:
-    print("Warning. Erroneous accessions detected.")
+    print("Warning. Erroneous accessions detected and ignored for analysis:")
     for acc in bad_accs:
         print(acc)
 print("SRR file appears to contain", str(count), "accessions. Beginning scPipe analysis")
 
 # Running the R script:
-
 # totals for progress messages
-total_accessions = len(SRR_acc_list)
+total_accessions = len(process_accs)
 acc_number = 1
 
-# Create SRR named directory where necessary
-for accession in SRR_acc_list:
+# Start analysis on the given list of accessions
+for accession in process_accs:
     # Stop subsequent inputs from building index if first run requires it
     if acc_number > 1:
         rebuild_index = False
@@ -99,6 +102,7 @@ for accession in SRR_acc_list:
         print("CSV output will be copied to existing CSVs directory")
     else:
         os.mkdir("CSVs")
+        print("CSVs output directory created")
 
     # Move to the accession directory
     os.chdir("./" + accession)
@@ -108,8 +112,6 @@ for accession in SRR_acc_list:
 
     # Remove large files that are not required to save disk space
     os.remove(accession + "out.aln.bam")
-
-    # copy output csv to csv collection
 
     # Progress statement
     print("Completed", acc_number, "of", total_accessions, ". remaining accessions:", remaining_accessions)

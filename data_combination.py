@@ -30,6 +30,7 @@ lines = []
 i = 0
 files = os.listdir(args.input_folder)
 print(files)
+files.sort()
 # for each file found
 for file in files:
     # check that it is the correct type of file
@@ -42,7 +43,6 @@ for file in files:
                 lines.append("\t" + file)
                 # add everything in the file to the lines list (including the row names)
                 lines += nextcsv.readlines()
-                print(lines)
 
             else:
                 lines[0] += "\t" + file
