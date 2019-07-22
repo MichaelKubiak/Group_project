@@ -17,7 +17,7 @@ $result = mysqli_query($connection,$sql);
 // Attempt select query execution
 if($result = mysqli_query($connection, $sql)){
    if(mysqli_num_rows($result) > 0){
-      echo "<table>";
+      echo "<table border='1' style='font-family:sans-serif;'>";
          echo "<tr>";
             echo "<th>Cell ID</th>";
             echo "<th>Cell Type</th>";

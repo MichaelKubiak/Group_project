@@ -26,16 +26,16 @@ write.table(full,"all_neurons",sep="\t")
 system(paste0("Rscript ./scde_analysis.R all_neurons -p -r ", args$cores))
 
 dist.mat<-read.delim("distance_matrix_for_pca",row.names=1,header=TRUE,sep="\t")
-cols <-list()
+types <-list()
 for (i in 1:length(colnames(dist.mat))){
   if (colnames(dist.mat)[[i]] %in% colnames(ad)){
     
-    cols<-append(cols, "blue")
+    types<-append(types, "adult neuron")
   }
   else if(colnames(dist.mat)[[i]] %in% colnames(fq)){
-    cols<-append(cols,"red")
+    types<-append(types,"foetal quiescent neuron")
   }else{
-    cols<-append(cols,"orange")
+    types<-append(types,"foetal replicating neuron")
   }
 }
 pca<-PCA(t(dist.mat))
