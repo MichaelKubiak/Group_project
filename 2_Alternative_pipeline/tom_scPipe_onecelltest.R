@@ -1,4 +1,4 @@
-BiocManager::install("scPipe")
+
 BiocManager::install("SingleCellExperiment")
 BiocManager::install("Rsubread")
 
@@ -13,8 +13,8 @@ reference_fasta = file.path("/home/tsc21/Documents/BS7120/Group_project/scPipe/R
 reference_anno = file.path("/home/tsc21/Documents/BS7120/Group_project/scPipe/Reference_genome/Homo_sapiens.GRCh38.97.chr.gff3") 
 # barcode_annotation_fn = system.file("extdata", "barcode_anno.csv", package = "scPipe")
 
-fq_R1 = file.path("/home/tsc21/Documents/BS7120/Group_project/scPipe/Test/cell1_1.fastq") 
-fq_R2 = file.path("/home/tsc21/Documents/BS7120/Group_project/scPipe/Test/cell1_2.fastq")
+fq_R1 = file.path("/home/tsc21/Documents/BS7120/Group_project/scPipe/Test/Barcoding/SRR1974543_1.fastq.gz") 
+fq_R2 = file.path("/home/tsc21/Documents/BS7120/Group_project/scPipe/Test/Barcoding/SRR1974543_2.fastq.gz")
 
 # Fastq reformatting
 sc_trim_barcode(file.path(data_dir, "combined.fastq.gz"),
@@ -30,7 +30,6 @@ Rsubread::align(index=file.path(data_dir, "read_index"),
                 readfile1=file.path(data_dir, "combined.fastq.gz"),
                 output_file=file.path(data_dir, "out.aln.bam"), 
                 type=0, nthreads=3 )
-
 
 # Assigning reads to annotated exons
 sc_exon_mapping(file.path(data_dir, "out.aln.bam"),

@@ -5,7 +5,7 @@ library(colourpicker)
 
 load("./selfgenerated_genecounting.RData")
 fluidPage(
-  titlePanel("tSNE plot for variable cluster numbers using the author generated gene counting matrix"),
+  titlePanel("tSNE plot for variable cluster numbers using the self generated gene counting matrix"),
   sidebarLayout(
     sidebarPanel(
       sliderInput("clusts", "Number of clusters to colour:", min=5, max=25, value = 10),
