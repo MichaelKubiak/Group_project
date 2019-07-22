@@ -30,3 +30,13 @@ INTO TABLE expression
 FIELDS TERMINATED BY '\t'
 LINES TERMINATED BY '\n';
 
+DROP VIEW IF EXISTS alldata;
+
+CREATE VIEW alldata AS
+SELECT gene_id, cell_id, cell_info.cell_type, cell_info.tissue, cell_info.donor_age
+FROM expression NATURAL JOIN cell_info;
+
+SELECT cell_id, cell_type, tissue, donor_age FROM alldata
+where gene_id = 'AP006222.1';
+
+SELECT DISTINCT(cell_type) FROM alldata;

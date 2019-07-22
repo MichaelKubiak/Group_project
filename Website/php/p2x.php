@@ -1,6 +1,6 @@
 <?php
 ini_set('memory_limit', '-1');
-Receptor: echo $_POST['rec']; 
+Receptor: echo $_POST['genes']; 
 
 
 
@@ -8,8 +8,7 @@ Receptor: echo $_POST['rec'];
 $connection = db_connect();
 
 // security on user query
-$input_gene = mysqli_real_escape_string($connection, $_POST['rec']);
-
+$input_gene = mysqli_real_escape_string($connection, $_POST['genes']);
 // define SQL
 $sql = sprintf("SELECT cell_id, cell_type, tissue, donor_age FROM alldata WHERE gene_id='%s'",$input_gene);
 
@@ -20,10 +19,10 @@ if($result = mysqli_query($connection, $sql)){
    if(mysqli_num_rows($result) > 0){
       echo "<table>";
          echo "<tr>";
-            echo "<th>cell_id</th>";
-            echo "<th>cell_type</th>";
-            echo "<th>tissue</th>";
-            echo "<th>donor_age</th>";
+            echo "<th>Cell ID</th>";
+            echo "<th>Cell Type</th>";
+            echo "<th>Tissue</th>";
+            echo "<th>Donor Age</th>";
          echo "</tr>";
       while($row = mysqli_fetch_array($result)){
          echo "<tr>";
@@ -54,7 +53,7 @@ function db_connect() {
    // connect unless connection exists
    if(!isset($connection)) {
       // load config data
-      $config = parse_ini_file('p2xdb.ini');	
+      $config = parse_ini_file('PHPsdhfoHF.ini');	
       // Try and connect to the database
       $connection = mysqli_connect('localhost',$config['username'],$config['password'],$config['dbname']);
        
