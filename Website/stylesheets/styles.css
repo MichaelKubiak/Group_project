@@ -9,18 +9,31 @@ body {
     color: yellow;
     background-color: green;
 }
-a.menu{
+.menu{
     display: inline-block;
     background-color: green;
     border:1px solid white;
     color: yellow;
     width:19%;
 }
-a.menu:hover{
+
+.menu:hover{
     background-color: yellow;
     color:green;
     border:1px solid black;
 }
+
+.menu button.dropbtn{
+    background-color: green;
+    color: yellow;
+    width: 100%;
+}
+.menu button.dropbtn:hover{
+    background-color: yellow;
+    color: green;
+    width: 100%;
+}
+
 .this_page{
     display: inline-block;
     background-color: yellow;
@@ -29,8 +42,7 @@ a.menu:hover{
     width:19%;
 }
 
-button.dropbtn{
-    display: inline-block;
+.this_page button.dropbtn{
     background-color: yellow;
     color: green;
     width:100%;
