@@ -35,6 +35,7 @@ body {
 }
 
 .this_page{
+    cursor: pointer;
     display: inline-block;
     background-color: yellow;
     border:1px solid black;
