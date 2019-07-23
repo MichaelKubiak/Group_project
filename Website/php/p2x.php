@@ -1,7 +1,7 @@
 <?php
-ini_set('memory_limit', '-1');
-Receptor: echo $_POST['genes']; 
-
+//ini_set('memory_limit', '-1');
+Receptor: $_POST['genes']; 
+$input_k = $_POST['k_values'];
 
 
 // connect
@@ -10,7 +10,9 @@ $connection = db_connect();
 // security on user query
 $input_gene = mysqli_real_escape_string($connection, $_POST['genes']);
 // define SQL
-$sql = sprintf("SELECT cell_id, cell_type, tissue, donor_age FROM alldata WHERE gene_id='%s'",$input_gene);
+$sql_format = "SELECT cell_id, cell_type, tissue, donor_age, %s FROM alldata WHERE gene_id='%s'";
+$sql = sprintf($sql_format,$input_k,$input_gene);
+echo $sql;
 
 
 $result = mysqli_query($connection,$sql);
@@ -23,6 +25,7 @@ if($result = mysqli_query($connection, $sql)){
             echo "<th>Cell Type</th>";
             echo "<th>Tissue</th>";
             echo "<th>Donor Age</th>";
+            echo "<th>Cluster Assignment</th>";
          echo "</tr>";
       while($row = mysqli_fetch_array($result)){
          echo "<tr>";
@@ -30,6 +33,7 @@ if($result = mysqli_query($connection, $sql)){
             echo "<td>" . $row['cell_type'] . "</td>";
             echo "<td>" . $row['tissue'] . "</td>";
             echo "<td>" . $row['donor_age'] . "</td>";
+            echo "<td>" . $row[$input_k] . "</td>";
          echo "</tr>";
       }
       echo "</table>";
