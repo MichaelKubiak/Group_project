@@ -7,15 +7,14 @@ load("./pca_data.RData")
 
 fluidPage(
   titlePanel("PCA plot"),
-  sidebarLayout(
-    sidebarPanel(
-      colourInput("colad", "Select colour for adult neurons", value="blue"),
-      colourInput("colfq", "Select colour for foetal quiescent neurons", value="red"),
-      colourInput("colfr", "Select colour for foetal replicating neurons", value="orange")
+  fluidRow(height=10,
+    column(3,
+      colourInput("colad", "Adult neurons", value="blue"),
+      colourInput("colfq", "Foetal quiescent neurons", value="red"),
+      colourInput("colfr", "Foetal replicating neurons", value="orange")
     ),
-    mainPanel(
-      plotlyOutput("plot1"),
-      verbatimTextOutput("Hi")
+    column(8,
+      plotlyOutput("plot1")
     )
   )
   
