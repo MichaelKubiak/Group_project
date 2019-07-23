@@ -42,6 +42,7 @@ body {
 }
 
 .this_page{
+    cursor: pointer;
     display: inline-block;
     background-color: yellow;
     border:1px solid black;
@@ -77,7 +78,7 @@ body {
     display: block;
 }
 
-a:hover{
+.dropdown-content a:hover{
     background-color: darkslategrey;
     color: white;
 }
@@ -85,7 +86,7 @@ a:hover{
 .show {display:block;}
 
 iframe.screensize{
-    width:50%;
+    width:65%;
 }
 iframe {
     border: none;

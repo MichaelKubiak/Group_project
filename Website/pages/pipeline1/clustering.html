@@ -2,10 +2,10 @@
 <html lang="en-gb">
     <head>
         <meta charset="UTF-8">
-        <title>Report</title>
+        <title>Original Pipeline</title>
         
-        <script src="../java_script/functions.js"></script>
-        <link href="../stylesheets/styles.css" rel="stylesheet">
+        <script src="/java_script/functions.js"></script>
+        <link href="/stylesheets/styles.css" rel="stylesheet">
     </head>
     <body>
         <div class=screenwidth>
@@ -13,7 +13,7 @@
                 <h1>Biology=TRUE <br>Analysis of single cell RNA sequencing data to determine cell type clustering</h1>
                 <div class=screenwidth>
                     <a class=menu href="/pages/index.html" style="text-decoration: none">Index</a>
-                    <div onmouseenter=p1Dropdown() onmouseout=closeMenu() class=menu>Original Pipeline
+                    <div onmouseenter=p1Dropdown() onmouseout=closeMenu() class=this_page>Original Pipeline
                         <div id="Graphs" class="dropdown-content">
                             <a onmouseenter=p1Dropdown() onmouseout=closeMenu() href="/pages/pipeline1/PCA.html">PCA Graph</a>
                             <a onmouseenter=p1Dropdown() onmouseout=closeMenu() href="/pages/pipeline1/clustering.html">Clustering Graphs</a>
@@ -21,13 +21,15 @@
                         </div>
                     </div>
                     <a class=menu href="/pages/newer_pipeline.html" style="text-decoration: none">Newer Pipeline</a>
-                    <a class=this_page href="/pages/report.html" style="text-decoration: none">Report</a>
+                    <a class=menu href="/pages/report.html" style="text-decoration: none">Report</a>
                     <a class=menu href="/pages/optional.html" style="text-decoration: none">Optional</a>
                     
                 </div>
             </div>    
         </div>
-        
+        <div class=screenwidth>
+            <iframe width=530 height=520 src="http://bioinf6.bioc.le.ac.uk:3838/srpgrpb/Pipeline1_Clustering/"></iframe>
+        </div>
     </body>
     
 

@@ -28,11 +28,11 @@ if($result = mysqli_query($connection, $sql)){
          echo "</tr>";
       while($row = mysqli_fetch_array($result)){
          echo "<tr>";
-            echo "<td>" . $row['cell_id'] . "</td>";
-            echo "<td>" . $row['cell_type'] . "</td>";
-            echo "<td>" . $row['tissue'] . "</td>";
-            echo "<td>" . $row['donor_age'] . "</td>";
-            echo "<td>" . $row[$input_k] . "</td>";
+            echo "<td style='text-align:center;'>" . $row['cell_id'] . "</td>";
+            echo "<td style='text-align:center;'>" . $row['cell_type'] . "</td>";
+            echo "<td style='text-align:center;'>" . $row['tissue'] . "</td>";
+            echo "<td style='text-align:center;'>" . $row['donor_age'] . "</td>";
+            echo "<td style='text-align:center;'>" . $row[$input_k] . "</td>";
          echo "</tr>";
       }
       echo "</table>";

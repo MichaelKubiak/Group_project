@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <title>Newer Pipeline</title>
         
-        <script src="../java_script/functions.js"></script>
-        <link href="../stylesheets/styles.css" rel="stylesheet">
+        <script src="/java_script/functions.js"></script>
+        <link href="/stylesheets/styles.css" rel="stylesheet">
     </head>
     <body>
         <div class=screenwidth>
@@ -13,12 +13,11 @@
                 <h1>Biology=TRUE <br>Analysis of single cell RNA sequencing data to determine cell type clustering</h1>
                 <div class=screenwidth>
                     <a class=menu href="/pages/index.html" style="text-decoration: none">Index</a>
-                    <div class=menu>
-                        <button onclick=p1Dropdown() class=dropbtn>Original Pipeline</button>
+                    <div onmouseenter=p1Dropdown() onmouseout=closeMenu() class=menu>Original Pipeline
                         <div id="Graphs" class="dropdown-content">
-                            <a href="/pages/pipeline1/PCA.html">PCA Graph</a>
-                            <a href="/pages/pipeline1/clustering.html">Clustering Graphs</a>
-                            <a href="/pages/pipeline1/spanning.html">Spanning Trees</a>
+                            <a onmouseenter=p1Dropdown() onmouseout=closeMenu() href="/pages/pipeline1/PCA.html">PCA Graph</a>
+                            <a onmouseenter=p1Dropdown() onmouseout=closeMenu() href="/pages/pipeline1/clustering.html">Clustering Graphs</a>
+                            <a onmouseenter=p1Dropdown() onmouseout=closeMenu() href="/pages/pipeline1/spanning.html">Spanning Trees</a>
                         </div>
                     </div>
                     <a class=this_page href="/pages/newer_pipeline.html" style="text-decoration: none">Newer Pipeline</a>
