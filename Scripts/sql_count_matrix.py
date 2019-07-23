@@ -1,3 +1,7 @@
+"""
+Reformat a gene count matrix to columns of data: CSV created in output can then be imported into mySQL
+"""
+
 import argparse
 
 # Argparse for user options and help
