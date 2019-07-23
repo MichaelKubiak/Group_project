@@ -3,7 +3,6 @@
 Receptor: $_POST['genes']; 
 $input_k = $_POST['k_values'];
 
-
 // connect
 $connection = db_connect();
 
@@ -12,7 +11,7 @@ $input_gene = mysqli_real_escape_string($connection, $_POST['genes']);
 // define SQL
 $sql_format = "SELECT cell_id, cell_type, tissue, donor_age, %s FROM alldata WHERE gene_id='%s'";
 $sql = sprintf($sql_format,$input_k,$input_gene);
-echo $sql;
+//echo $sql;
 
 
 $result = mysqli_query($connection,$sql);
@@ -65,7 +64,7 @@ function db_connect() {
    // If connection was not successful, handle the error
    if($connection === false) {
       // Handle error 
-       echo "connection fail";
+       echo "connection fail<br>";
       return mysqli_connect_error();	
    }
    return $connection;

@@ -27,19 +27,21 @@
                     <a class=menu href="original_pipeline.html" style="text-decoration: none">Original Pipeline</a>
                     <a class=menu href="newer_pipeline.html" style="text-decoration: none">Newer Pipeline</a>
                     <a class=menu href="report.html" style="text-decoration: none">Report</a>
-                    <a class=this_page href="optional.html" style="text-decoration: none">Optional</a>
+                    <a class=this_page href="optional.html" style="text-decoration: none">Query Genes</a>
                 </div>
             </div>    
         </div>
         <div class="form-group">
+            <fieldset>
+                <legend>Query data from the secondary pipeline analysis</legend>
    <form autocomplete="off" action="../php/p2x.php" method="post" target="Results_output">
        <div class="form-group">
            <p>Query a gene: <input id="genes" type="text" name="genes" placeholder="enter gene name">
        </div>
    
         <form action="../php/p2x.php" method="post">
-       <fieldset>
-          <legend>Select K value</legend>
+       
+          
           <p>
              <label>Select K value for query:</label>
              <select id = "k_values" name="k_values">
@@ -69,9 +71,10 @@
              </select>
           </p>
        </fieldset>
+               <input type="submit" value="Search">
+
     </form>
        
-   <input type="submit" value="Search">
 </form></div>
     
         <iframe name="Results_output"></iframe>
