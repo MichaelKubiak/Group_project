@@ -9,6 +9,13 @@ body {
     color: yellow;
     background-color: green;
 }
+.vid-border{
+  position: relative;
+  width: 49%;
+  height: 49%;
+  border: 1px solid black;
+  overflow: hidden;
+}
 .menu{
     display: inline-block;
     background-color: green;
