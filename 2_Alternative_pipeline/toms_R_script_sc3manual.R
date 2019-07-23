@@ -143,7 +143,8 @@ plotReducedDim(sce_selfgenerated, use_dimred = "PCA", colour_by = "cell_type")
 sc3_interactive(sce_selfgenerated)
 sc3_export_results_xls(sce_selfgenerated)
 
-plotPCA(sce_selfgenerated, colour_by = "cell_type")
+pca_plot_self <- plotPCA(sce_selfgenerated, colour_by = "cell_type", ncomponents = 3)
+pca_plot_author <- plotPCA(sce, colour_by = "cell_type", ncomponents = 3)
 
 plotTSNE(sce_selfgenerated, colour_by = "cell_type", rerun = TRUE)
 
@@ -152,7 +153,7 @@ col_data
 
 tsne_plot_sel_generated_genecount <- plotTSNE(sce_selfgenerated, colour_by = "sc3_10_clusters", rerun = TRUE, ncomponents = 3)
 
-View(tsne_plot_sel_generated_genecount)
+#View(tsne_plot_sel_generated_genecount)
 tsne_plot_sel_generated_genecount
 
 png(filename="/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/tsne_plot_10_selfgenerated.png", width=650, height=500)
