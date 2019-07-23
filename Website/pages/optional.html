@@ -23,21 +23,66 @@
             <div class=title>
                 <h1>Biology=TRUE <br>Analysis of single cell RNA sequencing data to determine cell type clustering</h1>
                 <div class=screenwidth>
-                    <a class=menu href="index.html" style="text-decoration: none">Index</a>
-                    <a class=menu href="original_pipeline.html" style="text-decoration: none">Original Pipeline</a>
-                    <a class=menu href="newer_pipeline.html" style="text-decoration: none">Newer Pipeline</a>
-                    <a class=menu href="report.html" style="text-decoration: none">Report</a>
-                    <a class=this_page href="optional.html" style="text-decoration: none">Optional</a>
+                    <a class=menu href="/pages/index.html" style="text-decoration: none">Index</a>
+                    <div class=menu>
+                        <button onclick=p1Dropdown() class=dropbtn>Original Pipeline</button>
+                        <div id="Graphs" class="dropdown-content">
+                            <a href="/pages/pipeline1/PCA.html">PCA Graph</a>
+                            <a href="/pages/pipeline1/clustering.html">Clustering Graphs</a>
+                            <a href="/pages/pipeline1/spanning.html">Spanning Trees</a>
+                        </div>
+                    </div>
+                    <a class=menu href="/pages/newer_pipeline.html" style="text-decoration: none">Newer Pipeline</a>
+                    <a class=menu href="/pages/report.html" style="text-decoration: none">Report</a>
+                    <a class=this_page href="/pages/optional.html" style="text-decoration: none">Optional</a>
+                    
                 </div>
             </div>    
         </div>
         <div class="form-group">
+            <fieldset>
+                <legend>Query data from the secondary pipeline analysis</legend>
    <form autocomplete="off" action="../php/p2x.php" method="post" target="Results_output">
        <div class="form-group">
            <p>Query a gene: <input id="genes" type="text" name="genes" placeholder="enter gene name">
        </div>
    
-   <input type="submit" value="Search">
+        <form action="../php/p2x.php" method="post">
+       
+          
+          <p>
+             <label>Select K value for query:</label>
+             <select id = "k_values" name="k_values">
+               <option value = "clust_5">5</option>
+               <option value = "clust_6">6</option>
+               <option value = "clust_7">7</option>
+               <option value = "clust_8">8</option>
+               <option value = "clust_9">9</option>
+               <option value = "clust_10">10</option>
+               <option value = "clust_11">11</option>
+               <option value = "clust_12">12</option>
+               <option value = "clust_13">13</option>
+               <option value = "clust_14">14</option>
+               <option value = "clust_15">15</option>
+               <option value = "clust_16">16</option>
+               <option value = "clust_17">17</option>
+               <option value = "clust_18">18</option>
+               <option value = "clust_19">19</option>
+               <option value = "clust_20">20</option>
+               <option value = "clust_21">21</option>
+               <option value = "clust_22">22</option>
+               <option value = "clust_23">23</option>
+               <option value = "clust_24">24</option>
+               <option value = "clust_25">25</option>
+                 
+                
+             </select>
+          </p>
+       </fieldset>
+               <input type="submit" value="Search">
+
+    </form>
+       
 </form></div>
     
         <iframe name="Results_output"></iframe>
