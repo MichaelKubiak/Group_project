@@ -11,7 +11,7 @@ $input_gene = mysqli_real_escape_string($connection, $_POST['genes']);
 // define SQL
 $sql_format = "SELECT cell_id, cell_type, tissue, donor_age, %s FROM alldata WHERE gene_id='%s'";
 $sql = sprintf($sql_format,$input_k,$input_gene);
-//echo $sql;
+
 
 
 $result = mysqli_query($connection,$sql);
