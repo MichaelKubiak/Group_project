@@ -12,12 +12,19 @@
             <div class=title>
                 <h1>Biology=TRUE <br>Analysis of single cell RNA sequencing data to determine cell type clustering</h1>
                 <div class=screenwidth>
+
                     <a class=menu href="../../pages/index.html" style="text-decoration: none">Home</a>
-                    <div onmouseenter=p1Dropdown() onmouseout=closeMenu() class=this_page>Original Pipeline
+                    <div onmouseenter=gDropdown() onmouseout= gcloseMenu() class=this_page>Original Pipeline
                         <div id="Graphs" class="dropdown-content">
-                            <a onmouseenter=p1Dropdown() onmouseout=closeMenu() href="../../pages/pipeline1/PCA.html">PCA Graph</a>
-                            <a onmouseenter=p1Dropdown() onmouseout=closeMenu() href="../../pages/pipeline1/clustering.html">Clustering Graphs</a>
-                            <a onmouseenter=p1Dropdown() onmouseout=closeMenu() href="../../pages/pipeline1/spanning.html">Spanning Trees</a>
+                            <a onmouseenter=gDropdown() onmouseout=scloseMenu() class=indropdown href="../../pages/pipeline1/PCA.html">PCA Graph</a>
+                            <a onmouseenter=gDropdown() onmouseout=scloseMenu() class=indropdown href="../../pages/pipeline1/clustering.html">Clustering Graphs</a>
+                            <div onmouseenter=sDropdown();gDropdown() onmouseout=sCloseMenu();gcloseMenu() class=indropdown>Spanning Trees
+                                <div onmouseenter=sDropdown();gDropdown() onmouseout=sCloseMenu();gcloseMenu() id="Spanning" class="dropdown-content">
+                                    
+                                    <a onmouseenter=sDropdown();gDropdown() onmouseout=scloseMenu();gcloseMenu() class=indropdown href="../../pages/pipeline1/PCA.html">Adult</a>
+                                    <a onmouseenter=sDropdown();gDropdown() onmouseout=scloseMenu();gcloseMenu() class=indropdown href="../../pages/pipeline1/clustering.html">Foetal</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <a class=menu href="../../pages/newer_pipeline.html" style="text-decoration: none">Newer Pipeline</a>

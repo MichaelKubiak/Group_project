@@ -16,4 +16,3 @@ function sDropdown(){
 function scloseMenu(){
     inner = "none";
 }
-
