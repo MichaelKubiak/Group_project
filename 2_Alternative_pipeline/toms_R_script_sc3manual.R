@@ -11,10 +11,10 @@ BiocManager::install("scater")
 library(SingleCellExperiment)
 library(scater)
 library(SC3)
-#library(zinbwave)
+library(zinbwave)
 
 
-gene_expression_matrix_selfgenerated <- read.delim("/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/count_matrix", row.names = 1, header = TRUE)
+gene_expression_matrix_selfgenerated <- read.deli ("/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/count_matrix", row.names = 1, header = TRUE)
 gene_expression_matrix_selfgenerated <- gene_expression_matrix[,order(names(gene_expression_matrix_selfgenerated))]
 info_file <- read.delim("/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/SraRunTable_465.csv")
 
@@ -53,9 +53,9 @@ sum_exp_selfgenerated
 # data. 
 # Zimbwave takes a SummarizedExperiment and returns a SingleCellExperiment object
 # k=how many latent variables we want to infer from the data, epsilon=num_genes
-#library(BiocParallel)
-#sce <- zinbwave(sum_exp, K=5:25, epsilon=21625, BPPARAM = BiocParallel::MulticoreParam(3), verbose = TRUE)
-#plotPCA(sce,colour_by = "cell_type")
+library(BiocParallel)
+sce_self <- zinbwave(sum_exp_selfgenerated, K=5:25, epsilon=21625, BPPARAM = BiocParallel::MulticoreParam(3), verbose = TRUE)
+plotPCA(sce_self,colour_by = "cell_type")
 
 
 
@@ -63,7 +63,7 @@ sum_exp_selfgenerated
 
 
 #normalised data for SC3 analysis
-norm_sce_selfgenerated <- normalizeSCE(object = sum_exp_selfgenerated, 
+norm_sce_selfgenerated <- normalizeSCE(object = sce_self, 
                          #exprs_values = as.matrix(truncated_expression_matrix), 
                          return_log = TRUE,
                          centre_size_factors = TRUE,
@@ -76,74 +76,75 @@ plotPCA(norm_sce_selfgenerated, colour_by = "cell_type")
 
 
 #prepare data for sc3 clustering
-sce_selfgenerated <- sc3_prepare(norm_sce_selfgenerated)
+sce_self <- sc3_prepare(norm_sce_selfgenerated)
 
 
 #estimate the optimal cluster number for k within dataset
-sce_selfgenerated <- sc3_estimate_k(sce_selfgenerated)
+sce_self <- sc3_estimate_k(sce_self)
 
-str(metadata(sce_selfgenerated)$sc3)
+str(metadata(sce_self)$sc3)
 
 
 #calc distances between cells
-sce_selfgenerated <- sc3_calc_dists(sce_selfgenerated)
+sce_self<- sc3_calc_dists(sce_self)
 
-names(metadata(sce_selfgenerated)$sc3$distances)
+names(metadata(sce_self)$sc3$distances)
 
 
 
 #transform distance matrix
-sce_selfgenerated <- sc3_calc_transfs(sce_selfgenerated)
+sce_self <- sc3_calc_transfs(sce_self)
 
-names(metadata(sce_selfgenerated)$sc3$transformations)
+names(metadata(sce_self)$sc3$transformations)
 
 
 #cluster data based data similarities, non-biased
-sce_selfgenerated <- sc3_kmeans(sce_selfgenerated, ks = 5:25)
+sce_self <- sc3_kmeans(sce_self, ks = 2:25)
 
-names(metadata(sce_selfgenerated)$sc3$kmeans)
+names(metadata(sce_self)$sc3$kmeans)
 
 
 #clustering solution after kmean 
-col_data <- colData(sce_selfgenerated)
+col_data <- colData(sce_self)
 head(col_data[ , grep("sc3_", colnames(col_data))])
 
 
-sce_selfgenerated <- sc3_calc_consens(sce_selfgenerated)
+sce_self <- sc3_calc_consens(sce_self)
 
 
-names(metadata(sce_selfgenerated)$sc3$consensus)
+names(metadata(sce_self)$sc3$consensus)
 
-names(metadata(sce_selfgenerated)$sc3$consensus$`2`)
+names(metadata(sce_self)$sc3$consensus$`2`)
 
 
 
-col_data <- colData(sce_selfgenerated)
+col_data <- colData(sce_self)
 head(col_data[ , grep("sc3_", colnames(col_data))])
 
 
 
 #Biology=TRUE
-sce_selfgenerated <- sc3_calc_biology(sce_selfgenerated, ks = 5:25)
+sce_self <- sc3_calc_biology(sce_self, ks = 2:25)
 
 #cell outliers for each k
-col_data <- colData(sce_selfgenerated)
+col_data <- colData(sce_self)
 head(col_data[ , grep("sc3_", colnames(col_data))])
 
 
 #DE and marker gene calc'd for each value k 
-row_data <- rowData(sce_selfgenerated)
+row_data <- rowData(sce_self)
 head(row_data[ , grep("sc3_", colnames(row_data))])
 
 
-reducedDim(sce_selfgenerated, withDimnames = TRUE)
-plotReducedDim(sce_selfgenerated, use_dimred = "PCA", colour_by = "cell_type")
+reducedDim(sce_self, withDimnames = TRUE)
+plotReducedDim(sce_self, use_dimred = "PCA", colour_by = "cell_type")
 
 
-sc3_interactive(sce_selfgenerated)
-sc3_export_results_xls(sce_selfgenerated)
+sc3_interactive(sce_self)
+sc3_export_results_xls(sce_self)
 
-pca_plot_self <- plotPCA(sce_selfgenerated, colour_by = "cell_type", ncomponents = 3)
+pca_plot_self <- plotPCA(sce_self, colour_by = "cell_type", ncomponents = 3)
+tsne_plot_self <- plotTSNE(sce_self, colour_by = "cell_type", ncomponents = 3)
 pca_plot_author <- plotPCA(sce, colour_by = "cell_type", ncomponents = 3)
 
 plotTSNE(sce_selfgenerated, colour_by = "cell_type", rerun = TRUE)
