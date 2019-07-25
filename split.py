@@ -18,7 +18,6 @@ parser.add_argument("--values", "-v", required=True, nargs="*", help="The values
 parser.add_argument("--output", "-o", nargs="*", help="Output file names")
 
 args = parser.parse_args()
-
 # open files
 with open(args.dataset) as datafile:
     data = datafile.readlines()
@@ -64,10 +63,11 @@ for j in range(len(args.values)):
 split_names = data[0].split("\t")
 for k in range(len(names_in_groups)):
     for j in range(len(split_names)):
-        if split_names[j].split("_")[0] in names_in_groups[k]:
+        if re.split("[o_]", split_names[j])[0] in names_in_groups[k]:
             for i in range(len(data)):
 
                 line_groups[k][i] += "\t" + data[i].split("\t")[j]
+
 
 for j in range(len(line_groups)):
     for i in range(len(line_groups[j])):
