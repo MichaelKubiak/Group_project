@@ -163,38 +163,4 @@ dev.off()
 
 
 
-#sum_exp_test <- SingleCellExperiment(
-#  assays = list(
-#    counts = as.matrix(truncated_expression_matrix),
-#    logcounts = log2(as.matrix(truncated_expression_matrix) + 1)
-#  ), 
-#  colData = info_file
-#)
 
-#rowData(sum_exp_test)$feature_symbol <- rownames(sum_exp_test)
-
-#tsne_pre_sc3 <- plotTSNE(sum_exp_test, rerun = TRUE)
-
-#png(filename="/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/tsne_pre_sc3.png", width=650, height=500)
-#plot(tsne_pre_sc3)
-#dev.off()
-
-
-#plotExpression(sce, rownames(sce))
-
-#COMPARE with distances made by Mike with the journal's pipeline
-
-#mike_dist <- read.delim("/home/tsc21/Documents/BS7120/Group_project/distance_matrix", row.names = 1, header = TRUE)
-#mike_dist <- as.dist(mike_dist)
-#truncated_mike_matrix <- truncated_expression_matrix[rowSums(truncated_expression_matrix[, -1])>0, ]
-
-#sum_exp_mike <- SingleCellExperiment(
-#  assays = list(
-#    counts = as.matrix(truncated_mike_matrix),
-#    logcounts = log2(as.matrix(truncated_mike_matrix) + 1)
-#  ), 
-#  colData = info_file
-#)
-#plotPCA(sum_exp_mike, colour_by = "cell_type")
-
-#plotTSNE(sum_exp_mike, colour_by = "cell_type")
