@@ -3,25 +3,32 @@
     <head>
         <meta charset="UTF-8">
         <title>index</title>
-        <script src="/java_script/functions.js"></script>
-        <link href="/stylesheets/styles.css" rel="stylesheet">
+        <script src="../java_script/functions.js"></script>
+        <link href="../stylesheets/styles.css" rel="stylesheet">
     </head>
     <body>
         <div class=screenwidth>
             <div class=title>
                 <h1>Biology=TRUE <br>Analysis of single cell RNA sequencing data to determine cell type clustering</h1>
                 <div class=screenwidth>
-                    <a class=this_page href="/pages/index.html" style="text-decoration: none">Index</a>
-                    <div onmouseenter=p1Dropdown() onmouseout=closeMenu() class=menu>Original Pipeline
+
+                    <a class=this_page href="../pages/index.html" style="text-decoration: none">Home</a>
+                    <div onmouseenter=gDropdown() onmouseout= gcloseMenu() class=menu>Original Pipeline
                         <div id="Graphs" class="dropdown-content">
-                            <a onmouseenter=p1Dropdown() onmouseout=closeMenu() href="/pages/pipeline1/PCA.html">PCA Graph</a>
-                            <a onmouseenter=p1Dropdown() onmouseout=closeMenu() href="/pages/pipeline1/clustering.html">Clustering Graphs</a>
-                            <a onmouseenter=p1Dropdown() onmouseout=closeMenu() href="/pages/pipeline1/spanning.html">Spanning Trees</a>
+                            <a onmouseenter=gDropdown() onmouseout=scloseMenu() class=indropdown href="../pages/pipeline1/PCA.html">PCA Graph</a>
+                            <a onmouseenter=gDropdown() onmouseout=scloseMenu() class=indropdown href="../pages/pipeline1/clustering.html">Clustering Graphs</a>
+                            <div onmouseenter=sDropdown();gDropdown() onmouseout=sCloseMenu();gcloseMenu() class=indropdown>Spanning Trees
+                                <div onmouseenter=sDropdown();gDropdown() onmouseout=sCloseMenu();gcloseMenu() id="Spanning" class="dropdown-content">
+                                    
+                                    <a onmouseenter=sDropdown();gDropdown() onmouseout=scloseMenu();gcloseMenu() class=indropdown href="../pages/pipeline1/PCA.html">Adult</a>
+                                    <a onmouseenter=sDropdown();gDropdown() onmouseout=scloseMenu();gcloseMenu() class=indropdown href="../pages/pipeline1/clustering.html">Foetal</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <a class=menu href="/pages/newer_pipeline.html" style="text-decoration: none">Newer Pipeline</a>
-                    <a class=menu href="/pages/report.html" style="text-decoration: none">Report</a>
-                    <a class=menu href="/pages/optional.html" style="text-decoration: none">Optional</a>
+                    <a class=menu href="../pages/newer_pipeline.html" style="text-decoration: none">Newer Pipeline</a>
+                    <a class=menu href="../pages/report.html" style="text-decoration: none">Report</a>
+                    <a class=menu href="../pages/optional.html" style="text-decoration: none">Query Genes</a>
                     
                 </div>
             </div>    
@@ -31,12 +38,12 @@
 			</p>
 			<p fontsize=12>Herein lies the world of single cell RNA sequencing (scRNAseq), the joys of 3D interactive graphs and A WORKING GENE SEARCH BAR.<br>
 				Your life will never be the same again.<br><br>
-				Our work is based on the scRNAseq data and analysis of Darmanis <i>et al.</i> (2015), who located 10 distinct cell types via the clustering of 466 brain cells.<br>
+				Our work is based on the scRNAseq data and analysis of <a href="https://www.pnas.org/content/112/23/7285" target="_blank">Darmanis <i>et al.</i> (2015)</a> , who located 10 distinct cell types via the clustering of 466 brain cells.<br>
 				We have replicated their methodology to identify whether the their results are reproducible.<br>
 				Additional pipelines have been located to see whether the use of different methodologies can still reproduce the same results.
 				Graphs produced by the replicated methodology and our new pipeline can be seen from the 'Original Pipeline' and Newer Pipeline' dropdown menus respectively.<br>
 				The report containing our findings can also be seen within the 'Report' page.<br>
-				To search our database of all of the genes used within the report, please select the 'Optional' tab.<br>
+				To search our database of all of the genes used within the report, please select the 'Query Genes' tab.<br>
 				We hope you enjoy your stay.
 			</p>
 		</div>
