@@ -140,7 +140,7 @@ reducedDim(sce_self, withDimnames = TRUE)
 plotReducedDim(sce_self, use_dimred = "PCA", colour_by = "cell_type")
 
 
-sc3_interactive(sce_self)
+sc2_interactive_self <- sc3_interactive(sce_self)
 sc3_export_results_xls(sce_self)
 
 pca_plot_self <- plotPCA(sce_self, colour_by = "cell_type", ncomponents = 3)
@@ -161,6 +161,5 @@ png(filename="/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/
 plot(tsne_plot_sel_generated_genecount)
 dev.off()
 
-
-
-
+remove(test)
+sc3_plot_silhouette(sce_author, k = 6)
