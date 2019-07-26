@@ -14,20 +14,25 @@
                 <div class=screenwidth>
 
                     <a class=menu href="../pages/index.html" style="text-decoration: none">Home</a>
-                    <div onmouseenter=gDropdown() onmouseout=gcloseMenu() class=menu>Original Pipeline
+                    <div onmouseenter=gDropdownOG() onmouseout=gcloseMenuOG() class=menu>Original Pipeline
                         <div id="Graphs" class="dropdown-content">
-                            <a onmouseenter=gDropdown() onmouseout=scloseMenu() class=indropdown href="../pages/pipeline1/PCA.html">PCA Graph</a>
-                            <a onmouseenter=gDropdown() onmouseout=scloseMenu() class=indropdown href="../pages/pipeline1/clustering.html">Clustering Graphs</a>
-                            <div onmouseenter=sDropdown();gDropdown() onmouseout=sCloseMenu();gcloseMenu() class=indropdown>Spanning Trees
-                                <div onmouseenter=sDropdown();gDropdown() onmouseout=sCloseMenu();gcloseMenu() id="Spanning" class="dropdown-content">
+                            <a onmouseenter=gDropdownOG() onmouseout=scloseMenuOG() class=indropdown href="../pages/pipeline1/PCA.html">PCA Graph</a>
+                            <a onmouseenter=gDropdownOG() onmouseout=scloseMenuOG() class=indropdown href="../pages/pipeline1/clustering.html">Clustering Graphs</a>
+                            <div onmouseenter=sDropdownOG();gDropdownOG() onmouseout=sCloseMenuOG();gcloseMenuOG() class=indropdown>Spanning Trees
+                                <div onmouseenter=sDropdownOG();gDropdownOG() onmouseout=sCloseMenuOG();gcloseMenuOG() id="Spanning" class="dropdown-content">
                                     
-                                    <a onmouseenter=sDropdown();gDropdown() onmouseout=scloseMenu();gcloseMenu() class=indropdown href="../pages/pipeline1/PCA.html">Adult</a>
-                                    <a onmouseenter=sDropdown();gDropdown() onmouseout=scloseMenu();gcloseMenu() class=indropdown href="../pages/pipeline1/clustering.html">Foetal</a>
+                                    <a onmouseenter=sDropdownOG();gDropdownOG() onmouseout=scloseMenuOG();gcloseMenuOG() class=indropdown href="../pages/pipeline1/PCA.html">Adult</a>
+                                    <a onmouseenter=sDropdownOG();gDropdownOG() onmouseout=scloseMenuOG();gcloseMenuOG() class=indropdown href="../pages/pipeline1/clustering.html">Foetal</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <a class=menu href="../pages/newer_pipeline.html" style="text-decoration: none">Newer Pipeline</a>
+                    <div onmouseenter=gDropdownNew() onmouseout=gcloseMenuNew() class=menu>Newer Pipeline
+                        <div id="GraphsNew" class="dropdown-content">
+                            <a onmouseenter=gDropdownNew() onmouseout=scloseMenuNew() class=indropdown href="../pages/pipeline2/clusters.html">Clustering Graph</a>
+                            <a onmouseenter=gDropdownNew() onmouseout=scloseMenuNew() class=indropdown href="../pages/pipeline1/statplots.html">Quality PLots</a>
+                        </div>
+                    </div>
                     <a class=this_page href="../pages/report.html" style="text-decoration: none">Report</a>
                     <a class=menu href="../pages/optional.html" style="text-decoration: none">Query Genes</a>
                     

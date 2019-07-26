@@ -1,18 +1,27 @@
 var inner = "none";
-function gDropdown(){
+function gDropdownOG(){
     document.getElementById("Graphs").classList.add("show");
     document.getElementById("Spanning").style.display = inner;
 }
 
-function gcloseMenu(){
+function gcloseMenuOG(){
     document.getElementById("Graphs").classList.remove("show");
     inner = "none";
 }
 
-function sDropdown(){
+function sDropdownOG(){
     inner = "block";
 }
 
-function scloseMenu(){
+function scloseMenuOG(){
     inner = "none";
+}
+
+function gDropdownNew(){
+    document.getElementById("GraphsNew").classList.add("show");
+}
+
+function gcloseMenuNew(){
+    document.getElementById("GraphsNew").classList.remove("show");
+
 }
