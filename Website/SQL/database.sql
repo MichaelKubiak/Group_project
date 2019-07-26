@@ -1,5 +1,4 @@
-CREATE DATABASE IF NOT EXISTS webserver;
-USE webserver; 
+USE DBGroupB; 
 
 DROP TABLE IF EXISTS cell_info;
 CREATE TABLE cell_info (
@@ -20,7 +19,7 @@ DROP TABLE IF EXISTS expression;
 CREATE TABLE expression (
 	gene_id VARCHAR(25) NOT NULL,
     cell_id VARCHAR(25) NOT NULL REFERENCES cell_info(cell_id),
-    expression INT NOT NULL,
+    gene_expr INT NOT NULL,
     PRIMARY KEY(gene_id, cell_id)
 );
 
@@ -65,12 +64,8 @@ IGNORE 1 ROWS;
 DROP VIEW IF EXISTS alldata;
 
 CREATE VIEW alldata AS
-SELECT gene_id, cell_id, cell_info.cell_type, cell_info.tissue, cell_info.donor_age, 
+SELECT gene_id, cell_id, gene_expr, cell_info.cell_type, cell_info.tissue, cell_info.donor_age, 
 clusters.clust_5, clusters.clust_6, clusters.clust_7, clusters.clust_8, clusters.clust_9, clusters.clust_10, clusters.clust_11, clusters.clust_12, clusters.clust_13, clusters.clust_14, clusters.clust_15, clusters.clust_16, clusters.clust_17, clusters.clust_18, clusters.clust_19, clusters.clust_20, clusters.clust_21, clusters.clust_22, clusters.clust_23, clusters.clust_24, clusters.clust_25
 FROM expression NATURAL JOIN cell_info NATURAL JOIN clusters;
 
-SELECT cell_id, cell_type, tissue, donor_age, clust_10 FROM alldata
-where gene_id = 'AP006222.1';
-
-SELECT DISTINCT(cell_type) FROM alldata;
-SELECT * FROM alldata;
+SELECT cell_id, gene_expr, clust_7, cell_type, tissue, donor_age FROM alldata WHERE gene_id='PLP1' ORDER BY gene_expr DESC;

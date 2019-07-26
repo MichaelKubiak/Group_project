@@ -2,6 +2,7 @@
 //ini_set('memory_limit', '-1');
 Receptor: $_POST['genes']; 
 $input_k = $_POST['k_values'];
+$sort_val = $_POST['sorting'];
 
 // connect
 $connection = db_connect();
@@ -9,8 +10,9 @@ $connection = db_connect();
 // security on user query
 $input_gene = mysqli_real_escape_string($connection, $_POST['genes']);
 // define SQL
-$sql_format = "SELECT cell_id, cell_type, tissue, donor_age, %s FROM alldata WHERE gene_id='%s'";
-$sql = sprintf($sql_format,$input_k,$input_gene);
+$sql_format = "SELECT cell_id, gene_expr, %s, cell_type, tissue, donor_age FROM alldata WHERE gene_id='%s' ORDER BY gene_expr %s";
+//SELECT cell_id, gene_expr, clust_7, cell_type, tissue, donor_age FROM alldata WHERE gene_id='PLP1' ORDER BY gene_expr DESC;
+$sql = sprintf($sql_format,$input_k,$input_gene,$sort_val);
 
 
 
@@ -21,18 +23,20 @@ if($result = mysqli_query($connection, $sql)){
       echo "<table border='1' style='font-family:sans-serif;'>";
          echo "<tr>";
             echo "<th>Cell ID</th>";
+            echo "<th>Expression Level</th>";
+            echo "<th>Cluster Assignment</th>";
             echo "<th>Cell Type</th>";
             echo "<th>Tissue</th>";
             echo "<th>Donor Age</th>";
-            echo "<th>Cluster Assignment</th>";
          echo "</tr>";
       while($row = mysqli_fetch_array($result)){
          echo "<tr>";
             echo "<td style='text-align:center;'>" . $row['cell_id'] . "</td>";
+            echo "<td style='text-align:center;'>" . $row['gene_expr'] . "</td>";
+            echo "<td style='text-align:center;'>" . $row[$input_k] . "</td>";
             echo "<td style='text-align:center;'>" . $row['cell_type'] . "</td>";
             echo "<td style='text-align:center;'>" . $row['tissue'] . "</td>";
             echo "<td style='text-align:center;'>" . $row['donor_age'] . "</td>";
-            echo "<td style='text-align:center;'>" . $row[$input_k] . "</td>";
          echo "</tr>";
       }
       echo "</table>";
