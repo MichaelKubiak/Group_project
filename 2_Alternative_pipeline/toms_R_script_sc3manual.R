@@ -1,10 +1,12 @@
+#This code is based on the SC3 tutorial. 
+
 if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 
 BiocManager::install("SC3")
 BiocManager::install("SingleCellExperiment")
 #BiocManager::install("SummarizedExperiment")
-#BiocManager::install("zinbwave")
+BiocManager::install("zinbwave")
 BiocManager::install("scater")
 
 #library(SummarizedExperiment)
@@ -140,7 +142,7 @@ reducedDim(sce_self, withDimnames = TRUE)
 plotReducedDim(sce_self, use_dimred = "PCA", colour_by = "cell_type")
 
 
-sc2_interactive_self <- sc3_interactive(sce_self)
+sc3_interactive(sce_self)
 sc3_export_results_xls(sce_self)
 
 pca_plot_self <- plotPCA(sce_self, colour_by = "cell_type", ncomponents = 3)
