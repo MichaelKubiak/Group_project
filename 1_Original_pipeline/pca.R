@@ -1,3 +1,8 @@
+# ---------------------------------------------------------------------------------------------------
+# A script to combine 3 files containing data about different groups of neurons, then use scde_analysis.R 
+# to produce a distance matrix that it can use to perform pca.
+# ---------------------------------------------------------------------------------------------------
+
 library(argparse)
 library(FactoMineR)
 library(rgl)
