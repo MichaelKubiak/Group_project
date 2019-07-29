@@ -1,16 +1,13 @@
 #! /usr/bin/env bash
 
-usage() { echo "TODO: write a usage guide";}
-
 # define options
-while getopts :i:c:bh option
+while getopts :i:c:b option
 do
 case "${option}"
 in
 i) INPUT=${OPTARG};;
 c) CORES=${OPTARG};;
 b) BUILD=true;;
-h) usage; exit;;
 esac
 done
 
@@ -27,23 +24,42 @@ if [ "$BUILD" = true ]; then
 		exit
 	fi
 	echo "Building count matrix"
-	../data_combination.py $INPUT ./data_combination
+	../Scripts/data_combination.py $INPUT ./data_combination
+	# split the foetal cells off into a file
+	./split.py ./data_combination ../SraRunTable_all.txt -n Sample_Name -s age -v prenatal -o ./foetal_cells
+
+	# split the neurons and each foetal cell type off into separate files
+	./split.py ./data_combination ../SraRunTable_all.txt -n Sample_Name -s cell_type -v neurons fetal_quiescent fetal_replicating -o ./neurons ./foetal_cells_quiescent ./foetal_cells_replicating
+
+	# run clustering of full dataset
+	Rscript ./scde_analysis.R ./data_combination -c -r $CORES
+
+	# produce spanning tree for neuron cells
+	Rscript ./scde_analysis.R ./neurons -s -r $CORES
+
+	# produce spanning tree for foetal cells
+	Rscript ./scde_analysis.R ./foetal_cells
+
+	#perform PCA for all neurons
+	Rscript ./pca.R ./neurons ./foetal_cells_quiescent ./foetal_cells_replicating -r $CORES
+else
+	# split the foetal cells off into a file
+	./split.py $INPUT ./SraRunTable.txt -n Sample_Name -s age -v prenatal -o ./foetal_cells
+
+	# split the neurons and each foetal cell type off into separate files
+	./split.py $INPUT ./SraRunTable.txt -n Sample_Name -s cell_type -v neurons fetal_quiescent fetal_replicating -o ./neurons ./foetal_cells_quiescent ./foetal_cells_replicating
+
+	# run clustering of full dataset
+	Rscript ./scde_analysis.R $INPUT -c -r $CORES
+
+	# produce spanning tree for neuron cells
+	Rscript ./scde_analysis.R ./neurons -s -r $CORES
+	
+	# produce spanning tree for foetal cells
+	Rscript ./scde_analysis.R ./foetal_cells
+
+	#perform PCA for all neurons
+	Rscript ./pca.R ./neurons ./foetal_cells_quiescent ./foetal_cells_replicating -r $CORES
+
 fi
 
-# split the foetal cells off into a file
-../split.py ./data_combination ../SraRunTable_all.txt -n Sample_Name -s age -v prenatal -o ./foetal_cells
-
-# split the neurons and each foetal cell type off into separate files
-../split.py ./data_combination ../SraRunTable_all.txt -n Sample_Name -s cell_type -v neurons fetal_quiescent fetal_replicating -o ./neurons ./foetal_cells_quiescent ./foetal_cells_replicating
-
-# run clustering of full dataset
-Rscript ./scde_analysis.R ./data_combination -c -r $CORES
-
-# produce spanning tree for neuron cells
-Rscript ./scde_analysis.R ./neurons -s -r $CORES
-
-# produce spanning tree for foetal cells
-Rscript ./scde_analysis.R ./foetal_cells
-
-#perform PCA for all neurons
-Rscript ./pca.R ./neurons ./foetal_cells_quiescent ./foetal_cells_replicating -r $CORES
