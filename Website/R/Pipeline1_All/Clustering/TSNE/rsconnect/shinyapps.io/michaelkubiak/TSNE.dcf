@@ -1,0 +1,12 @@
+name: TSNE
+title: TSNE
+username:
+account: michaelkubiak
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1055179
+bundleId: 2271743
+url: https://michaelkubiak.shinyapps.io/TSNE/
+when: 1564338256.89139
+asMultiple: FALSE
+asStatic: FALSE
