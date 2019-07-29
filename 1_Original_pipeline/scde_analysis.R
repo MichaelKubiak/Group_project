@@ -1,3 +1,8 @@
+# ---------------------------------------------------------------------------------------------------
+# A script to perform scde direct dropout analysis and produce a distance matrix that can be used for calculating clustering,
+# spanning trees, or pca
+# ---------------------------------------------------------------------------------------------------
+
 library(argparse)
 library(parallel)
 library(scde)
