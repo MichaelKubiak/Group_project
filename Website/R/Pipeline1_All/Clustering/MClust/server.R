@@ -9,7 +9,7 @@ function(input,output){
     data<-get(input$data)
     
     boxplot(data$clust$z, xlab="Cluster", ylab="Clustering Uncertainty")
-    par(mfrow=c(1,1))
+    
     })
   
   output$BIC<-renderPlot({
