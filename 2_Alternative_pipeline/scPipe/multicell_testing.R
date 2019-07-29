@@ -2,6 +2,7 @@
 library(scPipe)
 library(SingleCellExperiment)
 library(argparse)
+# original integration of scPipe for processing all cells
 
 # Argparse
 parser <- ArgumentParser(description="takes fastq files inputs and output file prefix for scPipe iterations")

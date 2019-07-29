@@ -2,6 +2,8 @@
 library(Rsubread)
 library(argparse)
 
+# Rsubread processing steps to generate a gene count matrix. Used in tandem with Rsubread.py (modify file paths before use)
+
 # Argparse
 parser <- ArgumentParser(description="takes fastq files inputs and output file prefix for scPipe iterations")
 parser$add_argument('--SRR', help='SRR prefix on input/output files')

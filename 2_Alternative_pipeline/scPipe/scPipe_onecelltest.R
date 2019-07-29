@@ -1,6 +1,7 @@
 library(scPipe)
 library(SingleCellExperiment)
 data_dir = "."
+# Original scPipe test file for a single cell of our data
 
 # file path:
 reference_fasta = file.path("/home/izzy_r/Group_project/Project_repo/Group_project/Reference_genome/ensembl/Homo_sapiens.GRCh38.dna.primary_assembly.fa")  

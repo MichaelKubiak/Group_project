@@ -4,6 +4,7 @@ library(Rsubread)
 #library(devtools)
 #install_github("rezakj/iCellR")
 
+# Initial one cell test for Rsubread
 
 data_dir = "/home/tsc21/Documents/BS7120/Group_project/2_Alternative_pipeline/scPipe/Test"
 

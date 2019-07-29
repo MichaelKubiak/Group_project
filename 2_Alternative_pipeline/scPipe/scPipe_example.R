@@ -2,6 +2,8 @@ library(scPipe)
 library(SingleCellExperiment)
 data_dir = "."
 
+# Example code given in scPipe tutorial 
+
 # file path:
 ERCCfa_fn = system.file("extdata", "ERCC92.fa", package = "scPipe")
 ERCCanno_fn = system.file("extdata", "ERCC92_anno.gff3", package = "scPipe")
