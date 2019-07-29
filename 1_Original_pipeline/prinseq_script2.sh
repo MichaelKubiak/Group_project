@@ -1,5 +1,5 @@
-#mrna processing section for original pipeline
-raw_data=/home/rsk17/Group_project/1_Original_pipeline/RAW_data/
+#mrna processing section for original pipeline which stars with raw fastq data files and goes through different processes such as aligning the reads using STAR to a reference human genome, to produce an expression matrix as the final result.
+raw_data="/home/rsk17/Group_project/1_Original_pipeline/RAW_data/"
 #loops through files within the named directory and files 
 for i in /home/rsk17/Group_project/1_Original_pipeline/RAW_data/*
 do
@@ -28,9 +28,9 @@ do
 
 #install htseq through pip:pip install HTSeq
 #-m is the mode to handle reads that are overlapping more than one feature (use intersection-nonempty), -s no = a read considered overlapping with a feature regardless of whether it is mapped to same or opposite strange as the feature. -s yes would indicate a read having to be mapped to same strand as the feature. -f same indicates the format of the input data. sam is the default so does not need to be stated but will not , > indicates the file to put the output information into.
-htseq-count -m intersection-nonempty -s no Aligned.out.sam UCSC_geneid.gtf > $j"output_sam.counts.csv"
+htseq-count -m intersection-nonempty -s no Aligned.out.sam hg_geneid.1.gtf > /home/rsk17/Group_project/1_Original_pipeline/expression_matrix/$j"output_sam.counts.csv"
 #call data_combination.py script and specify the location of the input files and the location where the output should be located, it combines csv files within the input location
-python3 data_combination.py /home/rsk17/Group_project/1_Original_pipeline /home/rsk17/Group_project/1_Original_pipeline/expression_matrix/combined_datas
+python3 data_combination.py /home/rsk17/Group_project/1_Original_pipeline/expression_matrix /home/rsk17/Group_project/1_Original_pipeline/expression_matrix/combined_data
 
 #in librecalc do:=SUM(B2:B28517)
 #use data from other sheets of the csv calc document https://ask.libreoffice.org/en/question/11496/calc-how-to-properly-reference-cells-from-other-sheet/
